@@ -1,10 +1,34 @@
-setwd('P:/Projects/GitHub_Prj/BioVariability')
+setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
 
 library(ggplot2)
 library(vegan)
 
 bcg<-read.csv("data/bug_bcg_10Yrs.csv",header=TRUE)
 taxa<-read.csv("data/taxaData_10Yr.csv",header=TRUE,stringsAsFactors = FALSE)
+
+##Frag Forest Analysis
+frag90<-read.csv("data/1990_ForestFragSum_RefSiteCatch.csv",header=TRUE)
+frag90<-frag90[,6:14]
+fragSum90<-aggregate(.~Str_Drain, frag90, sum)
+fragSum90$CoreSum<-(fragSum90$X4+fragSum90$X5+fragSum90$X6)/fragSum90$Sum
+fragSum90$FragSum<-(fragSum90$X1+fragSum90$X2+fragSum90$X3)/fragSum90$Sum
+fragSum90$OtherSum<-(fragSum90$X0)/fragSum90$Sum
+fragSum90<- fragSum90[,c(1,10:12)]
+
+frag15<-read.csv("data/2015_ForestFragSum_RefSiteCatch.csv",header=TRUE)
+frag15<-frag15[,6:14]
+fragSum15<-aggregate(.~Str_Drain, frag15, sum)
+fragSum15$CoreSum<-(fragSum15$X4+fragSum15$X5+fragSum15$X6)/fragSum15$Sum
+fragSum15$FragSum<-(fragSum15$X1+fragSum15$X2+fragSum15$X3)/fragSum15$Sum
+fragSum15$OtherSum<-(fragSum15$X0)/fragSum15$Sum
+fragSum15<- fragSum15[,c(1,10:12)]
+
+fragSum<-merge(fragSum90,fragSum15,by="Str_Drain")
+fragSum$fragSumCoreDiff<-fragSum[,2]-fragSum[,5]
+fragSum$fragSumFragDiff<-fragSum$FragSum.x-fragSum$FragSum.y
+fragSum$fragSumOtherDiff<-fragSum$OtherSum.x-fragSum$OtherSum.y
+
+
 taxa$OTU<-taxa$GENUS
 for (i in 1:dim(taxa)[1]){
   if(taxa$GENUS[i]=='Na'&taxa$FAMILY[i]=='Na'){
