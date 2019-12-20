@@ -1,9 +1,9 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd('P:/Projects/GitHub_Prj/BioVariability')
 
 library(ggplot2)
 library(vegan)
 
-bcg<-read.csv("data/bug_bcg_10Yrs.csv",header=TRUE)
+bcg<-read.csv("data/bug_bcg_5Yrs_Tier2.csv",header=TRUE)
 taxa<-read.csv("data/taxaData_10Yr.csv",header=TRUE,stringsAsFactors = FALSE)
 
 ##Frag Forest Analysis
