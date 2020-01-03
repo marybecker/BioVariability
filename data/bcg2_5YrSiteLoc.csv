@@ -1,4 +1,4 @@
-STA_SEQ,Station_Name,Proximity_Landmark,YLat,XLong
+SID,Station_Name,Proximity_Landmark,YLat,XLong
 14221,Hammonasset River,Adjacent Summer Hill Road (US Chestnut Hill Rd),41.3278,-72.6116
 14247,Hollenbeck River,at Cobble Road,41.9431,-73.3058
 14314,Natchaug River,downstream North Bear Hill Road,41.8008,-72.1182
