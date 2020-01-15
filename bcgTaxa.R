@@ -8,7 +8,7 @@ library(stringr)
 ##Read in the taxa, mastertaxa and site data
 taxa<-read.csv("data/taxaData_5Yr_Tier2.csv",header=TRUE,stringsAsFactors = FALSE)
 taxa$BCG_Attribute<-ifelse(is.na(taxa$BCG_Attribute),0,taxa$BCG_Attribute)
-taxa<-taxa[taxa$BCG_Attribute!=0,]##Subset only taxa with a BCG Attribute
+#taxa<-taxa[taxa$BCG_Attribute!=0,]##Subset only taxa with a BCG Attribute
 mastertaxa<-read.csv("data/masterTaxalist.csv",header=TRUE,stringsAsFactors = FALSE)
 sites<-read.csv("data/bcg2_5YrSiteLoc.csv",header=TRUE)
 sites<-sites[,c(1,2,4,5)]
@@ -24,7 +24,37 @@ for (i in 1:dim(taxa)[1]){
   }
 }
 
-##Merge Taxa List with Master Taxa List
+
+bcgMastertaxa<-unique(taxa[c("OTU","BCG_Attribute")])
+bcgMastertaxa<-bcgMastertaxa[order(bcgMastertaxa$OTU),]
+bcgMastertaxa<-as.data.frame(aggregate(bcgMastertaxa$BCG_Attribute~bcgMastertaxa$OTU,FUN=length))
+
+s<-unique(taxa[c("STA_SEQ","Sample_Date")])
+staxa<-aggregate(taxa$ABUNDANCE,by=as.list(taxa[,c("STA_SEQ","Sample_Date","OTU","BCG_Attribute")]),FUN=sum)
+
+bcg2Cnt<-data.frame(STA_SEQ=integer(),Sample_Date=character(),tCnt=integer(),sInd=integer(),bcg2Cnt=integer(),
+                    bcg23Cnt=integer(),taxa23=integer(),abund23=integer(),abund5=integer())#Create empty dataframe 
+
+for (i in 1:dim(s)[1]){
+  taxaSite<-staxa[staxa$STA_SEQ==s[i,1]&staxa$Sample_Date==s[i,2],]
+  tCnt<-dim(taxaSite)[1]
+  sInd<-sum(taxaSite$x)
+  cnt2<-dim(taxaSite[taxaSite$BCG_Attribute==2,])[1]
+  cnt23<-dim(taxaSite[taxaSite$BCG_Attribute<4,])[1]
+  taxa23<-cnt23/tCnt
+  ind23<-taxaSite[taxaSite$BCG_Attribute<4,]
+  abund23<-sum(ind23$x)/sum(taxaSite$x)
+  ind5<-taxaSite[taxaSite$BCG_Attribute>4,]
+  abund5<-sum(ind5$x)/sInd
+  cnt2DF<-data.frame(s[i,1],s[i,2],tCnt,sInd,cnt2,cnt23,taxa23,abund23,abund5)
+  colnames(cnt2DF)<-c("STA_SEQ","Sample_Date","tCnt","sInd","bcg2Cnt","bcg23Cnt","taxa23","abund23","abund5")
+  bcg2Cnt<-rbind(bcg2Cnt,cnt2DF)
+}
+
+
+
+###Format data for PhisViz#################################################
+##Merge Taxa List with Master Taxa List####################################
 taxaM <- merge(taxa,mastertaxa,by.x="TaxonNameCurrent",by.y="finalID")
 taxaM <- taxaM[taxaM$GENUS.x!='Na',] #only get taxa id down to the Genus level with BCG Attribute assigned
 
@@ -70,5 +100,13 @@ str(sites.SP) # Now is class SpatialPointsDataFrame
 
 #Write as geojson
 writeOGR(sites.SP,"sites",layer="sites", driver='GeoJSON')
+
+
+s<-unique(taxa[c("STA_SEQ","Sample_Date")])
+
+staxa<-aggregate(taxa$ABUNDANCE,by=as.list(taxa[,c("STA_SEQ","Sample_Date","OTU","BCG_Attribute")]),FUN=sum)
+taxaSite<-staxa[staxa$STA_SEQ==s[16,1]&staxa$Sample_Date==s[16,2],]
+dim(taxaSite[taxaSite$BCG_Attribute==2,])[1]
+
 
 

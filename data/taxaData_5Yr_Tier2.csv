@@ -74,7 +74,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Rheotanytarsus,L,3,11/2/2004,2004,Rheotanytarsus,Chironomidae,Rheotanytarsus,4,0
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Rhyacophila,L,2,11/2/2004,2004,Rhyacophila,Rhyacophilidae,Rhyacophila,3,1
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Taeniopteryx,L,7,11/2/2004,2004,Taeniopteryx,Taeniopterygidae,Taeniopteryx,3,1
-14221,Hammonasset River,1,Riffle,KN2M2,First,,Tanypodinae,L,1,11/2/2004,2004,Tanypodinae,Chironomidae,Na,5,0
+14221,Hammonasset River,1,Riffle,KN2M2,First,,Tanypodinae,L,1,11/2/2004,2004,Tanypodinae,Chironomidae,Na,,0
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Tanytarsus,L,3,11/2/2004,2004,Sublettea,Chironomidae,Sublettea,4,0
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Thienemannimyia group,L,1,11/2/2004,2004,Thienemannimyia group,Chironomidae,Thienemannimyia,4,0
 14221,Hammonasset River,1,Riffle,KN2M2,First,,Tipula,L,1,11/2/2004,2004,Tipula,Tipulidae,Tipula,4,0
@@ -519,7 +519,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Nigronia serricornis,L,1,10/28/2016,2016,Nigronia serricornis,Corydalidae,Nigronia,3,0
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Oligochaeta,L,1,10/28/2016,2016,Oligochaeta,Na,Na,,0
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Optioservus,L,8,10/28/2016,2016,Optioservus,Elmidae,Optioservus,4,0
-14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,2,10/28/2016,2016,Orthocladiinae,Chironomidae,Na,4,0
+14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,2,10/28/2016,2016,Orthocladiinae,Chironomidae,Na,,0
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Orthocladius Complex,L,6,10/28/2016,2016,Orthocladius Complex,Chironomidae,Orthocladius,4,0
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Oulimnius,L,15,10/28/2016,2016,Oulimnius,Elmidae,Oulimnius,3,0
 14247,Hollenbeck River,1,Riffle,KN2M2,First,WAA,Oulimnius latiusculus,A,2,10/28/2016,2016,Oulimnius latiusculus,Elmidae,Oulimnius,3,0
@@ -1357,7 +1357,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Neostempellina,L,1,10/16/2017,2017,Neostempellina,Chironomidae,Neostempellina,,0
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Neureclipsis,L,1,10/16/2017,2017,Neureclipsis,Polycentropodidae,Neureclipsis,4,1
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus,L,7,10/16/2017,2017,Optioservus,Elmidae,Optioservus,4,0
-14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/16/2017,2017,Orthocladiinae,Chironomidae,Na,4,0
+14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/16/2017,2017,Orthocladiinae,Chironomidae,Na,,0
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,A,1,10/16/2017,2017,Oulimnius,Elmidae,Oulimnius,3,0
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,L,5,10/16/2017,2017,Oulimnius,Elmidae,Oulimnius,3,0
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Paragnetina immarginata,L,1,10/16/2017,2017,Paragnetina immarginata,Perlidae,Paragnetina,3,1
@@ -1379,7 +1379,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Stenelmis,A,11,10/16/2017,2017,Stenelmis,Elmidae,Stenelmis,4,0
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Taeniopteryx,L,13,10/16/2017,2017,Taeniopteryx,Taeniopterygidae,Taeniopteryx,3,1
 14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,11,10/16/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
-14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,7,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+14314,Natchaug River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,7,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 14441,Salmon River,1,Riffle,KN2M2,First,,Acentrella,L,12,10/23/1991,1991,Acentrella,Baetidae,Acentrella,4,0
 14441,Salmon River,1,Riffle,KN2M2,First,,Acroneuria abnormis,L,5,10/23/1991,1991,Acroneuria abnormis,Perlidae,Acroneuria,3,1
 14441,Salmon River,1,Riffle,KN2M2,First,,Antocha,L,1,10/23/1991,1991,Antocha,Tipulidae,Antocha,5,0
@@ -2364,7 +2364,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14441,Salmon River,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,16,10/19/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
 14441,Salmon River,1,Riffle,KN2M2,First,EcoAnalysts,Thienemannimyia group,L,1,10/19/2017,2017,Thienemannimyia group,Chironomidae,Thienemannimyia,4,0
 14441,Salmon River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia bavarica group,L,3,10/19/2017,2017,Tvetenia bavarica group,Chironomidae,Tvetenia,4,0
-14441,Salmon River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,2,10/19/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+14441,Salmon River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,2,10/19/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Acentrella,L,3,11/4/1993,1993,Acentrella,Baetidae,Acentrella,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Acroneuria abnormis,L,1,11/4/1993,1993,Acroneuria abnormis,Perlidae,Acroneuria,3,1
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Acroneuria lycorias,L,1,11/4/1993,1993,Acroneuria lycorias,Perlidae,Acroneuria,3,1
@@ -2938,7 +2938,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Ophiogomphus,L,1,10/9/2007,2007,Ophiogomphus,Gomphidae,Ophiogomphus,2,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Optioservus ovalis,A,1,10/9/2007,2007,Optioservus ovalis,Elmidae,Optioservus,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Optioservus trivittatus,A,1,10/9/2007,2007,Optioservus trivittatus,Elmidae,Optioservus,4,0
-14442,Sandy Brook,1,Riffle,KN2M2,First,,Orthocladiinae,L,1,10/9/2007,2007,Orthocladiinae,Chironomidae,Na,4,0
+14442,Sandy Brook,1,Riffle,KN2M2,First,,Orthocladiinae,L,1,10/9/2007,2007,Orthocladiinae,Chironomidae,Na,,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Orthocladius,L,1,10/9/2007,2007,Orthocladius,Chironomidae,Orthocladius,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Oulimnius,L,3,10/9/2007,2007,Oulimnius,Elmidae,Oulimnius,3,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,,Paragnetina immarginata,L,6,10/9/2007,2007,Paragnetina immarginata,Perlidae,Paragnetina,3,1
@@ -3117,7 +3117,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Nigronia serricornis,L,1,11/10/2011,2011,Nigronia serricornis,Corydalidae,Nigronia,3,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus,L,5,11/10/2011,2011,Optioservus,Elmidae,Optioservus,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus immunis,A,1,11/10/2011,2011,Optioservus immunis,Elmidae,Optioservus,4,0
-14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,11/10/2011,2011,Orthocladiinae,Chironomidae,Na,4,0
+14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,11/10/2011,2011,Orthocladiinae,Chironomidae,Na,,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladius,L,2,11/10/2011,2011,Orthocladius,Chironomidae,Orthocladius,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladius (Euorthocladius),L,4,11/10/2011,2011,Orthocladius (Euorthocladius),Chironomidae,Orthocladius,4,0
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladius (Euorthocladius) rivulorum,L,4,11/10/2011,2011,Orthocladius (Euorthocladius) rivulorum,Chironomidae,Orthocladius,4,0
@@ -3387,7 +3387,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Taeniopteryx,L,3,10/6/2017,2017,Taeniopteryx,Taeniopterygidae,Taeniopteryx,3,1
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,2,10/6/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
 14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia bavarica group,L,1,10/6/2017,2017,Tvetenia bavarica group,Chironomidae,Tvetenia,4,0
-14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,1,10/6/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+14442,Sandy Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,1,10/6/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Acentrella,L,1,10/11/1994,1994,Acentrella,Baetidae,Acentrella,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Acroneuria abnormis,L,1,10/11/1994,1994,Acroneuria abnormis,Perlidae,Acroneuria,3,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Anchytarsus bicolor,L,2,10/11/1994,1994,Anchytarsus bicolor,Ptilodactylidae,Anchytarsus,3,0
@@ -3570,7 +3570,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Diplectrona modesta,L,1,9/23/2010,2010,Diplectrona modesta,Hydropsychidae,Diplectrona,3,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Dolophilodes,L,33,9/23/2010,2010,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Ectopria,L,1,9/23/2010,2010,Ectopria,Psephenidae,Ectopria,3,0
-14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Empididae,L,1,9/23/2010,2010,Empididae,Empididae,Na,4,0
+14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Empididae,L,1,9/23/2010,2010,Empididae,Empididae,Na,,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Epeorus,L,4,9/23/2010,2010,Epeorus,Heptageniidae,Epeorus,2,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Ephemerella,L,18,9/23/2010,2010,Eurylophella,Ephemerellidae,Eurylophella,4,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,,Glossosoma,L,3,9/23/2010,2010,Glossosoma,Glossosomatidae,Glossosoma,4,1
@@ -3628,7 +3628,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus immunis,A,3,10/12/2011,2011,Optioservus immunis,Elmidae,Optioservus,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus trivittatus,A,1,10/12/2011,2011,Optioservus trivittatus,Elmidae,Optioservus,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Oribatei,A,1,10/12/2011,2011,Oribatei,Na,Oribatei,,0
-14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/12/2011,2011,Orthocladiinae,Chironomidae,Na,4,0
+14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/12/2011,2011,Orthocladiinae,Chironomidae,Na,,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,A,4,10/12/2011,2011,Oulimnius,Elmidae,Oulimnius,3,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,L,4,10/12/2011,2011,Oulimnius,Elmidae,Oulimnius,3,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Paragnetina immarginata,L,1,10/12/2011,2011,Paragnetina immarginata,Perlidae,Paragnetina,3,1
@@ -3659,7 +3659,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Chimarra aterrima,L,13,10/15/2012,2012,Chimarra aterrima,Philopotamidae,Chimarra,4,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Dicranota,L,7,10/15/2012,2012,Dicranota,Tipulidae,Dicranota,3,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Dolophilodes,L,25,10/15/2012,2012,Dolophilodes,Philopotamidae,Dolophilodes,3,1
-14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Empididae,L,1,10/15/2012,2012,Empididae,Empididae,Na,4,0
+14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Empididae,L,1,10/15/2012,2012,Empididae,Empididae,Na,,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Epeorus,L,1,10/15/2012,2012,Epeorus,Heptageniidae,Epeorus,2,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Ephemerella,L,11,10/15/2012,2012,Eurylophella,Ephemerellidae,Eurylophella,4,1
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,EcoAnalysts,Ephemerella invaria,L,17,10/15/2012,2012,Ephemerella invaria,Ephemerellidae,Ephemerella,3,1
@@ -3752,7 +3752,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Baetis pluto,L,2,9/15/2014,2014,Baetis pluto,Baetidae,Baetis,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Baetis tricaudatus,L,6,9/15/2014,2014,Baetis tricaudatus,Baetidae,Baetis,4,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Boyeria grafiana,L,1,9/15/2014,2014,Boyeria grafiana,Aeshnidae,Boyeria,4,0
-14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Caecidotea,A,1,9/15/2014,2014,Caecidotea,Asellidae,Caecidotea,4,0
+14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Caecidotea,A,1,9/15/2014,2014,Caecidotea,Asellidae,Caecidotea,5,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Ceratopsyche,L,4,9/15/2014,2014,Ceratopsyche,Hydropsychidae,Ceratopsyche,5,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Ceratopsyche bronta,L,13,9/15/2014,2014,Ceratopsyche bronta,Hydropsychidae,Ceratopsyche,5,0
 14470,Tankerhoosen River,1,Riffle,KN2M2,First,WAA,Ceratopsyche sparna,L,4,9/15/2014,2014,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
@@ -4238,7 +4238,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14484,West Branch Salmon Brook,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,35,10/17/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
 14484,West Branch Salmon Brook,1,Riffle,KN2M2,First,EcoAnalysts,Thienemannimyia group,L,1,10/17/2017,2017,Thienemannimyia group,Chironomidae,Thienemannimyia,4,0
 14484,West Branch Salmon Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia bavarica group,L,3,10/17/2017,2017,Tvetenia bavarica group,Chironomidae,Tvetenia,4,0
-14484,West Branch Salmon Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,5,10/17/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+14484,West Branch Salmon Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,5,10/17/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 14584,Roaring Brook,1,Riffle,KN2M2,First,,Acentrella,L,1,10/13/1999,1999,Acentrella,Baetidae,Acentrella,4,0
 14584,Roaring Brook,1,Riffle,KN2M2,First,,Acroneuria abnormis,L,1,10/13/1999,1999,Acroneuria abnormis,Perlidae,Acroneuria,3,1
 14584,Roaring Brook,1,Riffle,KN2M2,First,,Acroneuria lycorias,L,3,10/13/1999,1999,Acroneuria lycorias,Perlidae,Acroneuria,3,1
@@ -4757,7 +4757,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,,Nigronia serricornis,L,3,10/24/2002,2002,Nigronia serricornis,Corydalidae,Nigronia,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Optioservus,L,4,10/24/2002,2002,Optioservus,Elmidae,Optioservus,4,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Optioservus ovalis,A,1,10/24/2002,2002,Optioservus ovalis,Elmidae,Optioservus,4,0
-14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,L,1,10/24/2002,2002,Orthocladiinae,Chironomidae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,L,1,10/24/2002,2002,Orthocladiinae,Chironomidae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Oulimnius,L,2,10/24/2002,2002,Oulimnius,Elmidae,Oulimnius,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Paraleptophlebia,L,3,10/24/2002,2002,Paraleptophlebia,Leptophlebiidae,Paraleptophlebia,2,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Parametriocnemus,L,2,10/24/2002,2002,Parametriocnemus,Chironomidae,Parametriocnemus,4,0
@@ -4788,7 +4788,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,,Brachycentrus appalachia,L,1,10/7/2003,2003,Brachycentrus appalachia,Brachycentridae,Brachycentrus,3,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Ceratopsyche sparna,L,3,10/7/2003,2003,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Chimarra aterrima,L,2,10/7/2003,2003,Chimarra aterrima,Philopotamidae,Chimarra,4,1
-14720,Green Fall River,1,Riffle,KN2M2,First,,Chironomini,L,3,10/7/2003,2003,Chironomini,Chironomidae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,,Chironomini,L,3,10/7/2003,2003,Chironomini,Chironomidae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Diplectrona,L,1,10/7/2003,2003,Diplectrona,Hydropsychidae,Diplectrona,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Dolophilodes,L,26,10/7/2003,2003,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Epeorus,L,1,10/7/2003,2003,Epeorus,Heptageniidae,Epeorus,2,1
@@ -4809,7 +4809,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,,Nemata,A,2,10/7/2003,2003,Nematoda,Na,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Nigronia serricornis,L,3,10/7/2003,2003,Nigronia serricornis,Corydalidae,Nigronia,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Oecetis,L,3,10/7/2003,2003,Oecetis,Leptoceridae,Oecetis,4,1
-14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,L,3,10/7/2003,2003,Orthocladiinae,Chironomidae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,L,3,10/7/2003,2003,Orthocladiinae,Chironomidae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladius Complex,L,1,10/7/2003,2003,Orthocladius Complex,Chironomidae,Orthocladius,4,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Oulimnius latiusculus,L,3,10/7/2003,2003,Oulimnius latiusculus,Elmidae,Oulimnius,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Parachaetocladius,L,1,10/7/2003,2003,Parachaetocladius,Chironomidae,Parachaetocladius,3,0
@@ -4859,7 +4859,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,,Nigronia serricornis,L,10,9/22/2004,2004,Nigronia serricornis,Corydalidae,Nigronia,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Optioservus,A,1,9/22/2004,2004,Optioservus,Elmidae,Optioservus,4,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Optioservus,L,4,9/22/2004,2004,Optioservus,Elmidae,Optioservus,4,0
-14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,P,1,9/22/2004,2004,Orthocladiinae,Chironomidae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,,Orthocladiinae,P,1,9/22/2004,2004,Orthocladiinae,Chironomidae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Philopotamidae,L,3,9/22/2004,2004,Philopotamidae,Philopotamidae,Na,,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Polypedilum aviceps,L,37,9/22/2004,2004,Polypedilum aviceps,Chironomidae,Polypedilum,4,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Polypedilum aviceps,P,4,9/22/2004,2004,Polypedilum aviceps,Chironomidae,Polypedilum,4,0
@@ -4967,7 +4967,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,,Ceratopsyche sparna,L,7,9/21/2007,2007,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Cheumatopsyche,L,1,9/21/2007,2007,Cheumatopsyche,Hydropsychidae,Cheumatopsyche,5,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Dolophilodes,L,23,9/21/2007,2007,Dolophilodes,Philopotamidae,Dolophilodes,3,1
-14720,Green Fall River,1,Riffle,KN2M2,First,,Empididae,L,1,9/21/2007,2007,Empididae,Empididae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,,Empididae,L,1,9/21/2007,2007,Empididae,Empididae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,,Epeorus,L,1,9/21/2007,2007,Epeorus,Heptageniidae,Epeorus,2,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Glossosoma,L,1,9/21/2007,2007,Glossosoma,Glossosomatidae,Glossosoma,4,1
 14720,Green Fall River,1,Riffle,KN2M2,First,,Hexatoma,L,2,9/21/2007,2007,Hexatoma,Tipulidae,Hexatoma,2,0
@@ -5273,7 +5273,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Cricotopus,L,2,10/1/2013,2013,Cricotopus,Chironomidae,Cricotopus,5.5,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Dicranota,L,1,10/1/2013,2013,Dicranota,Tipulidae,Dicranota,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Dolophilodes,L,20,10/1/2013,2013,Dolophilodes,Philopotamidae,Dolophilodes,3,1
-14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Empididae,L,1,10/1/2013,2013,Empididae,Empididae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Empididae,L,1,10/1/2013,2013,Empididae,Empididae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Epeorus,L,4,10/1/2013,2013,Epeorus,Heptageniidae,Epeorus,2,1
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Glossosoma,L,1,10/1/2013,2013,Glossosoma,Glossosomatidae,Glossosoma,4,1
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Hexatoma,L,2,10/1/2013,2013,Hexatoma,Tipulidae,Hexatoma,2,0
@@ -5354,7 +5354,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Dicranota,L,7,10/5/2015,2015,Dicranota,Tipulidae,Dicranota,3,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Dolophilodes,L,24,10/5/2015,2015,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Eccoptura xanthenes,L,1,10/5/2015,2015,Eccoptura xanthenes,Perlidae,Eccoptura,3,1
-14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Empididae,P,1,10/5/2015,2015,Empididae,Empididae,Na,4,0
+14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Empididae,P,1,10/5/2015,2015,Empididae,Empididae,Na,,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Epeorus,L,1,10/5/2015,2015,Epeorus,Heptageniidae,Epeorus,2,1
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Gammarus,L,1,10/5/2015,2015,Gammarus,Gammaridae,Gammarus,5.5,0
 14720,Green Fall River,1,Riffle,KN2M2,First,WAA,Glossosoma,L,1,10/5/2015,2015,Glossosoma,Glossosomatidae,Glossosoma,4,1
@@ -5550,7 +5550,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Lumbriculidae,A,1,9/17/2008,2008,Lumbriculidae,Lumbriculidae,Na,4,0
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Nemata,A,1,9/17/2008,2008,Nematoda,Na,Na,,0
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Optioservus,L,2,9/17/2008,2008,Optioservus,Elmidae,Optioservus,4,0
-14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Orthocladiinae,P,1,9/17/2008,2008,Orthocladiinae,Chironomidae,Na,4,0
+14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Orthocladiinae,P,1,9/17/2008,2008,Orthocladiinae,Chironomidae,Na,,0
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Oulimnius,L,5,9/17/2008,2008,Oulimnius,Elmidae,Oulimnius,3,0
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Paracapnia,L,1,9/17/2008,2008,Paracapnia,Capniidae,Paracapnia,3,1
 14842,Indian Meadow Brook,1,Riffle,KN2M2,First,,Parachaetocladius,L,4,9/17/2008,2008,Parachaetocladius,Chironomidae,Parachaetocladius,3,0
@@ -6015,7 +6015,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 15020,Eightmile River,1,Riffle,KN2M2,First,EcoAnalysts,Tanytarsus,L,4,10/16/2017,2017,Sublettea,Chironomidae,Sublettea,4,0
 15020,Eightmile River,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,3,10/16/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
 15020,Eightmile River,1,Riffle,KN2M2,First,EcoAnalysts,Trichoptera,L,1,10/16/2017,2017,Trichoptera,Na,Na,,0
-15020,Eightmile River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,12,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+15020,Eightmile River,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,12,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 15176,Natchaug River,1,Riffle,KN2M2,First,,Acroneuria abnormis,L,18,9/21/2007,2007,Acroneuria abnormis,Perlidae,Acroneuria,3,1
 15176,Natchaug River,1,Riffle,KN2M2,First,,Antocha,L,1,9/21/2007,2007,Antocha,Tipulidae,Antocha,5,0
 15176,Natchaug River,1,Riffle,KN2M2,First,,Argia,L,3,9/21/2007,2007,Argia,Coenagrionidae,Argia,4,0
@@ -6577,7 +6577,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus,L,4,10/6/2017,2017,Optioservus,Elmidae,Optioservus,4,0
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus ovalis,A,1,10/6/2017,2017,Optioservus ovalis,Elmidae,Optioservus,4,0
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Optioservus trivittatus,A,2,10/6/2017,2017,Optioservus trivittatus,Elmidae,Optioservus,4,0
-15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/6/2017,2017,Orthocladiinae,Chironomidae,Na,4,0
+15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladiinae,L,1,10/6/2017,2017,Orthocladiinae,Chironomidae,Na,,0
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Orthocladius (Euorthocladius),L,1,10/6/2017,2017,Orthocladius (Euorthocladius),Chironomidae,Orthocladius,4,0
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,A,7,10/6/2017,2017,Oulimnius,Elmidae,Oulimnius,3,0
 15240,Hubbard Brook,1,Riffle,KN2M2,First,EcoAnalysts,Oulimnius,L,1,10/6/2017,2017,Oulimnius,Elmidae,Oulimnius,3,0
@@ -6836,7 +6836,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Ceratopsyche sparna,L,32,10/15/2012,2012,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Cheumatopsyche,L,3,10/15/2012,2012,Cheumatopsyche,Hydropsychidae,Cheumatopsyche,5,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chimarra aterrima,L,5,10/15/2012,2012,Chimarra aterrima,Philopotamidae,Chimarra,4,1
-15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chironomini,L,1,10/15/2012,2012,Chironomini,Chironomidae,Na,4,0
+15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chironomini,L,1,10/15/2012,2012,Chironomini,Chironomidae,Na,,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Corydalus cornutus,L,1,10/15/2012,2012,Corydalus cornutus,Corydalidae,Corydalus,4,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Cricotopus,L,1,10/15/2012,2012,Cricotopus,Chironomidae,Cricotopus,5.5,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,EcoAnalysts,Cricotopus,P,1,10/15/2012,2012,Cricotopus,Chironomidae,Cricotopus,5.5,0
@@ -7019,7 +7019,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Nigronia serricornis,L,4,10/25/2016,2016,Nigronia serricornis,Corydalidae,Nigronia,3,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Optioservus,L,10,10/25/2016,2016,Optioservus,Elmidae,Optioservus,4,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Optioservus ovalis,A,2,10/25/2016,2016,Optioservus ovalis,Elmidae,Optioservus,4,0
-15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,10/25/2016,2016,Orthocladiinae,Chironomidae,Na,4,0
+15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,10/25/2016,2016,Orthocladiinae,Chironomidae,Na,,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Oulimnius,L,2,10/25/2016,2016,Oulimnius,Elmidae,Oulimnius,3,0
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Paragnetina media,L,2,10/25/2016,2016,Paragnetina media,Perlidae,Paragnetina,3,1
 15312,Beaver Brook,1,Riffle,KN2M2,First,WAA,Polypedilum aviceps,L,3,10/25/2016,2016,Polypedilum aviceps,Chironomidae,Polypedilum,4,0
@@ -7127,7 +7127,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Anchytarsus bicolor,L,13,10/5/2012,2012,Anchytarsus bicolor,Ptilodactylidae,Anchytarsus,3,0
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Bezzia group,L,1,10/5/2012,2012,Bezzia group,Ceratopogonidae,Bezzia,3,0
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Boyeria grafiana,L,1,10/5/2012,2012,Boyeria grafiana,Aeshnidae,Boyeria,4,0
-15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Caecidotea,NA,3,10/5/2012,2012,Caecidotea,Asellidae,Caecidotea,4,0
+15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Caecidotea,NA,3,10/5/2012,2012,Caecidotea,Asellidae,Caecidotea,5,0
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Calopteryx,L,3,10/5/2012,2012,Calopteryx,Calopterygidae,Calopteryx,4,0
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Cheumatopsyche,L,7,10/5/2012,2012,Cheumatopsyche,Hydropsychidae,Cheumatopsyche,5,0
 15315,Burnham Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chimarra,L,3,10/5/2012,2012,Chimarra,Philopotamidae,Chimarra,4,1
@@ -8001,7 +8001,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Diplectrona,L,24,9/18/2007,2007,Diplectrona,Hydropsychidae,Diplectrona,3,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Dolophilodes,L,20,9/18/2007,2007,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Ectopria,L,1,9/18/2007,2007,Ectopria,Psephenidae,Ectopria,3,0
-16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Empididae,L,1,9/18/2007,2007,Empididae,Empididae,Na,4,0
+16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Empididae,L,1,9/18/2007,2007,Empididae,Empididae,Na,,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Epeorus,L,1,9/18/2007,2007,Epeorus,Heptageniidae,Epeorus,2,1
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Ephemerella,L,3,9/18/2007,2007,Eurylophella,Ephemerellidae,Eurylophella,4,1
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,,Glossosoma,L,2,9/18/2007,2007,Glossosoma,Glossosomatidae,Glossosoma,4,1
@@ -8120,7 +8120,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Ceratopsyche,L,1,9/21/2012,2012,Ceratopsyche,Hydropsychidae,Ceratopsyche,5,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Ceratopsyche sparna,L,3,9/21/2012,2012,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Cheumatopsyche,L,6,9/21/2012,2012,Cheumatopsyche,Hydropsychidae,Cheumatopsyche,5,0
-16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chironomini,L,1,9/21/2012,2012,Chironomini,Chironomidae,Na,4,0
+16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Chironomini,L,1,9/21/2012,2012,Chironomini,Chironomidae,Na,,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Corynoneura,L,1,9/21/2012,2012,Corynoneura,Chironomidae,Corynoneura,3,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Diplectrona modesta,L,62,9/21/2012,2012,Diplectrona modesta,Hydropsychidae,Diplectrona,3,0
 16112,Hemlock Valley Brook,1,Riffle,KN2M2,First,EcoAnalysts,Dolophilodes,L,3,9/21/2012,2012,Dolophilodes,Philopotamidae,Dolophilodes,3,1
@@ -8555,8 +8555,8 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Diplectrona,L,21,9/19/2007,2007,Diplectrona,Hydropsychidae,Diplectrona,3,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Dolophilodes,L,10,9/19/2007,2007,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Ectopria,L,5,9/19/2007,2007,Ectopria,Psephenidae,Ectopria,3,0
-16119,Day Pond Brook,1,Riffle,KN2M2,First,,Empididae,L,1,9/19/2007,2007,Empididae,Empididae,Na,4,0
-16119,Day Pond Brook,1,Riffle,KN2M2,First,,Empididae,P,1,9/19/2007,2007,Empididae,Empididae,Na,4,0
+16119,Day Pond Brook,1,Riffle,KN2M2,First,,Empididae,L,1,9/19/2007,2007,Empididae,Empididae,Na,,0
+16119,Day Pond Brook,1,Riffle,KN2M2,First,,Empididae,P,1,9/19/2007,2007,Empididae,Empididae,Na,,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Ephemerellidae,L,1,9/19/2007,2007,Ephemerellidae,Ephemerellidae,Na,3,1
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Eurylophella funeralis,L,1,9/19/2007,2007,Eurylophella funeralis,Ephemerellidae,Eurylophella,4,1
 16119,Day Pond Brook,1,Riffle,KN2M2,First,,Glossosoma,L,4,9/19/2007,2007,Glossosoma,Glossosomatidae,Glossosoma,4,1
@@ -8848,7 +8848,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Nigronia serricornis,L,3,9/30/2016,2016,Nigronia serricornis,Corydalidae,Nigronia,3,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Oligochaeta,L,2,9/30/2016,2016,Oligochaeta,Na,Na,,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Optioservus tardellus,L,11,9/30/2016,2016,Optioservus tardellus,Elmidae,Optioservus,4,
-16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,9/30/2016,2016,Orthocladiinae,Chironomidae,Na,4,0
+16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,9/30/2016,2016,Orthocladiinae,Chironomidae,Na,,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Oulimnius,L,8,9/30/2016,2016,Oulimnius,Elmidae,Oulimnius,3,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Oulimnius nitidulus,A,2,9/30/2016,2016,Oulimnius nitidulus,Elmidae,Oulimnius,3,0
 16119,Day Pond Brook,1,Riffle,KN2M2,First,WAA,Parametriocnemus,L,1,9/30/2016,2016,Parametriocnemus,Chironomidae,Parametriocnemus,4,0
@@ -9244,7 +9244,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16124,Flat Brook,1,Riffle,KN2M2,First,EcoAnalysts,Teloganopsis deficiens,L,5,10/16/2017,2017,Teloganopsis deficiens,Ephemerellidae,Teloganopsis,3,1
 16124,Flat Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tipula,L,2,10/16/2017,2017,Tipula,Tipulidae,Tipula,4,0
 16124,Flat Brook,1,Riffle,KN2M2,First,EcoAnalysts,Trichoptera,L,1,10/16/2017,2017,Trichoptera,Na,Na,,0
-16124,Flat Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,1,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,,0
+16124,Flat Brook,1,Riffle,KN2M2,First,EcoAnalysts,Tvetenia discoloripes group,L,1,10/16/2017,2017,Tvetenia discoloripes group,Chironomidae,Tvetenia,4,0
 16127,Jakes Brook,1,Riffle,KN2M2,First,,Acroneuria,L,21,9/24/2007,2007,Acroneuria,Perlidae,Acroneuria,3,1
 16127,Jakes Brook,1,Riffle,KN2M2,First,,Baetis,L,4,9/24/2007,2007,Plauditus,Baetidae,Plauditus,3,0
 16127,Jakes Brook,1,Riffle,KN2M2,First,,Baetis tricaudatus,L,6,9/24/2007,2007,Baetis tricaudatus,Baetidae,Baetis,4,0
@@ -9850,7 +9850,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Diamesa,P,1,10/11/2012,2012,Sympotthastia,Chironomidae,Sympotthastia,,0
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Dicrotendipes neomodestus,L,1,10/11/2012,2012,Dicrotendipes neomodestus,Chironomidae,Dicrotendipes,5.5,0
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Dolophilodes,L,13,10/11/2012,2012,Dolophilodes,Philopotamidae,Dolophilodes,3,1
-16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Empididae,P,1,10/11/2012,2012,Empididae,Empididae,Na,4,0
+16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Empididae,P,1,10/11/2012,2012,Empididae,Empididae,Na,,0
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Epeorus,L,3,10/11/2012,2012,Epeorus,Heptageniidae,Epeorus,2,1
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Ephemerella,L,3,10/11/2012,2012,Eurylophella,Ephemerellidae,Eurylophella,4,1
 16139,Brown Brook,1,Riffle,KN2M2,First,EcoAnalysts,Eurylophella,L,5,10/11/2012,2012,Eurylophella,Ephemerellidae,Eurylophella,4,1
@@ -9938,7 +9938,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Ceratopsyche sparna,L,14,9/29/2014,2014,Ceratopsyche sparna,Hydropsychidae,Ceratopsyche,5,0
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Chimarra aterrima,L,1,9/29/2014,2014,Chimarra aterrima,Philopotamidae,Chimarra,4,1
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Dolophilodes,L,17,9/29/2014,2014,Dolophilodes,Philopotamidae,Dolophilodes,3,1
-16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Empididae,L,2,9/29/2014,2014,Empididae,Empididae,Na,4,0
+16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Empididae,L,2,9/29/2014,2014,Empididae,Empididae,Na,,0
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Epeorus,L,7,9/29/2014,2014,Epeorus,Heptageniidae,Epeorus,2,1
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Eukiefferiella,L,1,9/29/2014,2014,Tvetenia,Chironomidae,Tvetenia,4,0
 16139,Brown Brook,1,Riffle,KN2M2,First,WAA,Eurylophella funeralis,L,21,9/29/2014,2014,Eurylophella funeralis,Ephemerellidae,Eurylophella,4,1
@@ -10125,7 +10125,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16143,Little River,1,Riffle,KN2M2,First,,Dolophilodes,L,13,9/25/2007,2007,Dolophilodes,Philopotamidae,Dolophilodes,3,1
 16143,Little River,1,Riffle,KN2M2,First,,Eccoptura xanthenes,L,2,9/25/2007,2007,Eccoptura xanthenes,Perlidae,Eccoptura,3,1
 16143,Little River,1,Riffle,KN2M2,First,,Ectopria,L,1,9/25/2007,2007,Ectopria,Psephenidae,Ectopria,3,0
-16143,Little River,1,Riffle,KN2M2,First,,Empididae,L,1,9/25/2007,2007,Empididae,Empididae,Na,4,0
+16143,Little River,1,Riffle,KN2M2,First,,Empididae,L,1,9/25/2007,2007,Empididae,Empididae,Na,,0
 16143,Little River,1,Riffle,KN2M2,First,,Eurylophella funeralis,L,1,9/25/2007,2007,Eurylophella funeralis,Ephemerellidae,Eurylophella,4,1
 16143,Little River,1,Riffle,KN2M2,First,,Glossosoma,L,1,9/25/2007,2007,Glossosoma,Glossosomatidae,Glossosoma,4,1
 16143,Little River,1,Riffle,KN2M2,First,,Hydropsyche,L,21,9/25/2007,2007,Ceratopsyche,Hydropsychidae,Ceratopsyche,5,0
@@ -10386,7 +10386,7 @@ STA_SEQ,Station_Name,Rep,Habitat,Device,Subsample Rep,LAB_NAME,TAXON_NAME,LIFE S
 16143,Little River,1,Riffle,KN2M2,First,WAA,Ophiogomphus,L,2,10/17/2013,2013,Ophiogomphus,Gomphidae,Ophiogomphus,2,0
 16143,Little River,1,Riffle,KN2M2,First,WAA,Optioservus,L,25,10/17/2013,2013,Optioservus,Elmidae,Optioservus,4,0
 16143,Little River,1,Riffle,KN2M2,First,WAA,Optioservus ovalis,A,8,10/17/2013,2013,Optioservus ovalis,Elmidae,Optioservus,4,0
-16143,Little River,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,10/17/2013,2013,Orthocladiinae,Chironomidae,Na,4,0
+16143,Little River,1,Riffle,KN2M2,First,WAA,Orthocladiinae,L,1,10/17/2013,2013,Orthocladiinae,Chironomidae,Na,,0
 16143,Little River,1,Riffle,KN2M2,First,WAA,Orthocladius Complex,L,1,10/17/2013,2013,Orthocladius Complex,Chironomidae,Orthocladius,4,0
 16143,Little River,1,Riffle,KN2M2,First,WAA,Oulimnius latiusculus,L,12,10/17/2013,2013,Oulimnius latiusculus,Elmidae,Oulimnius,3,0
 16143,Little River,1,Riffle,KN2M2,First,WAA,Paraleptophlebia,L,2,10/17/2013,2013,Paraleptophlebia,Leptophlebiidae,Paraleptophlebia,2,1
