@@ -1,4 +1,4 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd('P:/Projects/GitHub_Prj/BioVariability')
 
 library(ggplot2)
 library(vegan)
@@ -25,9 +25,9 @@ for (i in 1:dim(taxa)[1]){
 }
 
 
-bcgMastertaxa<-unique(taxa[c("OTU","BCG_Attribute")])
-bcgMastertaxa<-bcgMastertaxa[order(bcgMastertaxa$OTU),]
-bcgMastertaxa<-as.data.frame(aggregate(bcgMastertaxa$BCG_Attribute~bcgMastertaxa$OTU,FUN=length))
+# bcgMastertaxa<-unique(taxa[c("OTU","BCG_Attribute")])
+# bcgMastertaxa<-bcgMastertaxa[order(bcgMastertaxa$OTU),]
+# bcgMastertaxa<-as.data.frame(aggregate(bcgMastertaxa$BCG_Attribute~bcgMastertaxa$OTU,FUN=length))
 
 s<-unique(taxa[c("STA_SEQ","Sample_Date")])
 staxa<-aggregate(taxa$ABUNDANCE,by=as.list(taxa[,c("STA_SEQ","Sample_Date","OTU","BCG_Attribute")]),FUN=sum)
@@ -51,7 +51,8 @@ for (i in 1:dim(s)[1]){
   bcg2Cnt<-rbind(bcg2Cnt,cnt2DF)
 }
 
-
+ggplot(bcg2Cnt[bcg2Cnt$STA_SEQ==15176,],aes(Sample_Date,abund23))+
+  geom_point()
 
 ###Format data for PhisViz#################################################
 ##Merge Taxa List with Master Taxa List####################################
