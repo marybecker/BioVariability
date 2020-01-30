@@ -1,4 +1,4 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd('P:/Projects/GitHub_Prj/BioVariability')
 
 library(ggplot2)
 library(vegan)
@@ -7,7 +7,8 @@ library(stringr)
 
 CWsum<-read.csv("data/ColdWaterSites_ColdWaterFishSum.csv",header=TRUE)
 ftaxa<-read.csv("data/FishSamplesColdWaterSites_012220.csv",header=TRUE,stringsAsFactors=FALSE)
-pt<-read.csv("data/phylo_tree.csv",header=TRUE,stingsAsFactors=FALSE)
+pt<-read.csv("data/phylo_tree.csv",header=TRUE)
+temp<-read.csv("data/CWSite_HOBOdata.csv",header=TRUE)
 
 ###################################################################################################
 
@@ -28,8 +29,9 @@ for (i in 1:length(sites)){
   CWYrDiff<-rbind(CWYrDiff,CWSiteDiff)
 }
 
-CWYrDiff$YrDiff<-abs(CWYrDiff$SampYr1-CWYrDiff$SampYr2)#Number of years between samples
+
 CWYrDiff$FishDiff<-abs(CWYrDiff$CWFishYr1-CWYrDiff$CWFishYr2)#Difference in FishPer100M between samples
+CWYrDiff$YrDiff<-abs(CWYrDiff$SampYr1-CWYrDiff$SampYr2)#Number of years between samples
 CWYrDiff$y1Cold<-ifelse(CWYrDiff$CWFishYr1>=10,1,0)#If classified cold Samp1
 CWYrDiff$y2Cold<-ifelse(CWYrDiff$CWFishYr2>=10,1,0)#If classified cold Samp1
 CWYrDiff$ColdDiff<-CWYrDiff$y1Cold+CWYrDiff$y2Cold#Note if classification has changed
@@ -210,6 +212,68 @@ chgP4<- ggplot(cwChgBase,aes(chg,pct))+
           theme(axis.title.x=element_blank())
 
 ggsave(plot=chgP4,"fishPlots/cwChgBase.jpg",width=4,height=4,units="in")
+
+########################################################################################################
+###Multi-Year Temperature data #########################################################################
+########################################################################################################
+
+##Identify all possible combinations of the same site in different years for comparison
+
+tempCat<-temp[,c(1:3)]
+tempSites<-unique(tempCat$SID)
+TempYrDiff<-data.frame(STA_SEQ=integer(),SampYr1=integer(),
+                     TempYr1=double(),SampYr2=integer(),
+                     TempYr2=double())#Create empty dataframe to store combinations
+
+for (i in 1:length(tempSites)){
+  tempSite<-tempCat[tempCat$SID == tempSites[i],]
+  comb<-as.data.frame(t(combn(tempSite$Year,2)))#create a dataframe of all possible combinations
+  TempSiteDiff<-merge(tempSite,comb,by.x="Year",by.y="V1",all.y=TRUE)
+  TempSiteDiff<-merge(tempSite,TempSiteDiff,by.x="Year",by.y="V2",all.y=TRUE)
+  TempSiteDiff<-TempSiteDiff[,c(2,1,3,4,6)]
+  colnames(TempSiteDiff)<-c("STA_SEQ","SampYr1","TempYr1","SampYr2","TempYr2")
+  TempYrDiff<-rbind(TempYrDiff,TempSiteDiff)
+}
+
+
+TempYrDiff$TempDiff<-abs(TempYrDiff$TempYr1-TempYrDiff$TempYr2)#Difference in FishPer100M between samples
+TempYrDiff$YrDiff<-abs(TempYrDiff$SampYr1-TempYrDiff$SampYr2)#Number of years between samples
+TempYrDiff$y1Cold<-ifelse(TempYrDiff$TempYr1<18.29,1,0)#If classified cold Samp1
+TempYrDiff$y2Cold<-ifelse(TempYrDiff$TempYr2<18.29,1,0)#If classified cold Samp1
+TempYrDiff$ColdDiff<-TempYrDiff$y1Cold+TempYrDiff$y2Cold#Note if classification has changed
+TempYrDiff$YrMax<-ifelse(TempYrDiff$SampYr1>TempYrDiff$SampYr2,TempYrDiff$SampYr1,TempYrDiff$SampYr2)#Most recent Yr
+TempYrDiff$YrMaxDiff<-ifelse(TempYrDiff$SampYr1==TempYrDiff$YrMax,
+                           TempYrDiff$TempYr1-TempYrDiff$TempYr2,
+                           TempYrDiff$TempYr2-TempYrDiff$TempYr1)#Chg in FishPer100M most recent - earlier Samp
+TempYrDiff$YrMaxColdDiff<-ifelse(TempYrDiff$SampYr1==TempYrDiff$YrMax,
+                               TempYrDiff$y1Cold-TempYrDiff$y2Cold,
+                               TempYrDiff$y2Cold-TempYrDiff$y1Cold)#Chg in Cold Class Most recent - earlier samp
+TempYrDiff$TempMaxYr<-ifelse(TempYrDiff$SampYr1==TempYrDiff$YrMax,
+                             TempYrDiff$TempYr1,
+                             TempYrDiff$TempYr2)
+TempYrDiff$TempMinYr<-ifelse(TempYrDiff$SampYr1==TempYrDiff$YrMax,
+                             TempYrDiff$TempYr2,
+                             TempYrDiff$TempYr1)
+
+#Summary stats of differences in samples taken within 5 Years apart
+dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
+summary(TempYrDiff[TempYrDiff$YrDiff<=5,6])
+quantile(TempYrDiff[TempYrDiff$YrDiff<=5,6],c(0.05,0.95))
+
+#Pct of samples that do not change cold/not cold category between combinations of samples
+dim(TempYrDiff[TempYrDiff$ColdDiff==0&TempYrDiff$YrDiff<=5|TempYrDiff$ColdDiff==2&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
+dim(TempYrDiff[TempYrDiff$ColdDiff==0|TempYrDiff$ColdDiff==2,])[1]/dim(TempYrDiff)[1]
+
+ggplot(TempYrDiff[TempYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
+  geom_histogram(binwidth=0.5,fill="blue",alpha=0.4)+
+  labs(x="Difference in Temp (Degree C) Between Two Years",y="Percent of Samples",
+       title="Distribution of Temp Differences Between Samples Taken 5 or Less Years Apart (n=723)")
+
+
+
+dim(TempYrDiff[TempYrDiff$YrMaxDiff<(0)&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
+dim(TempYrDiff[TempYrDiff$YrMaxDiff<(-1.2)&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
+
 
 ########################################################################################################
 ###Format data for PhisViz##############################################################################
