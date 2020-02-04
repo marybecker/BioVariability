@@ -7,10 +7,35 @@ library(stringr)
 
 CWsum<-read.csv("data/ColdWaterSites_ColdWaterFishSum.csv",header=TRUE)
 ftaxa<-read.csv("data/FishSamplesColdWaterSites_012220.csv",header=TRUE,stringsAsFactors=FALSE)
+ftaxa$OTU<-ifelse(ftaxa$IsStocked==TRUE,paste0(ftaxa$OTU,"-STK"),ftaxa$OTU)
 pt<-read.csv("data/phylo_tree.csv",header=TRUE)
 temp<-read.csv("data/CWSite_HOBOdata.csv",header=TRUE)
 
+taxa<-ftaxa
+taxa$SID<-paste0(taxa$STA_SEQ,"_",taxa$SampleYr)
+taxa<-taxa[,c("SID","OTU","FishPer100M")]
+taxa<-reshape(taxa,idvar="SID",timevar="OTU",direction="wide")
+colnames(taxa)[2:dim(taxa)[2]]<-str_sub(colnames(taxa)[2:53],13,-1)
+taxa[is.na(taxa)]<-0
+row.names(taxa)<-taxa$SID
+taxa<-taxa[,2:53]
+
+taxa<-taxa[rowSums(taxa)>0,]
+vegdist(taxa[c("16933_2015","16933_1998"),],"bray")
+
+apply(taxa>0,1,sum)
+
 ###################################################################################################
+TPColors=c("#e66101","#fdb863","#b2abd2","#49006a")
+
+ggplot(CWsum,aes(YearGrp,MaxOfFishPer100M))+
+  geom_boxplot(fill=TPColors[1:3])+
+  scale_y_sqrt()+
+  labs(y="Fish Per 100 M")+
+  scale_x_discrete(labels=c("1990s","2000s","2010s"))+
+  theme(axis.title.x=element_blank())
+
+wilcox.test(MaxOfFishPer100M~YearGrp, data=CWsum[CWsum$YearGrp=="G1"|CWsum$YearGrp=="G3",],conf.int=TRUE)
 
 ##Identify all possible combinations of the same site in different years for comparison
 CW<-CWsum[,1:3]
@@ -48,6 +73,16 @@ CWYrDiff$CWFishMaxYr<-ifelse(CWYrDiff$SampYr1==CWYrDiff$YrMax,
 CWYrDiff$CWFishMinYr<-ifelse(CWYrDiff$SampYr1==CWYrDiff$YrMax,
                              CWYrDiff$CWFishYr2,
                              CWYrDiff$CWFishYr1)
+CWYrDiff$Dist<-NA
+
+for (i in 1:dim(CWYrDiff)[1]){
+  s1<-paste0(CWYrDiff[i,"STA_SEQ"],"_",CWYrDiff[i,"SampYr1"])
+  s2<-paste0(CWYrDiff[i,"STA_SEQ"],"_",CWYrDiff[i,"SampYr2"])
+  ifelse((any(row.names(taxa)==s1)==TRUE&any(row.names(taxa)==s2)==TRUE),
+         CWYrDiff$Dist[i]<-vegdist(taxa[c(s1,s2),],"bray",binary=TRUE), CWYrDiff$Dist[i]<-1)
+}
+
+##ggplot(CWYrDiff,(aes(YrDiff,Dist)))+geom_point()
 
 #Summary stats of differences in samples taken within 5 Years apart
 dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
@@ -59,7 +94,7 @@ dim(CWYrDiff[CWYrDiff$ColdDiff==0&CWYrDiff$YrDiff<=5|CWYrDiff$ColdDiff==2&CWYrDi
 dim(CWYrDiff[CWYrDiff$ColdDiff==0|CWYrDiff$ColdDiff==2,])[1]/dim(CWYrDiff)[1]
 
 ggplot(CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
-  geom_histogram(binwidth=15,fill="blue",alpha=0.4)+
+  geom_histogram(binwidth=15,fill=TPColors[4],alpha=0.7)+
   labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples",
        title="Distribution of FishPer100M Differences Between Samples Taken 5 or Less Years Apart (n=409)")+
   xlim(-300,300)
@@ -75,7 +110,7 @@ dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWY
 
 
 ####################################################################################################
-TPColors=c("green","red","black","blue")
+
 
 grpSum<-aggregate(CWsum$MaxOfFishPer100M,by=as.list(CWsum[,c("STA_SEQ","YearGrp")]),FUN=max)
 grpWide<-reshape(grpSum,idvar="STA_SEQ",timevar="YearGrp",direction="wide")
@@ -116,11 +151,11 @@ summary(grpWide[complete.cases(grpWide[,5:7]),3])
 summary(grpWide[complete.cases(grpWide[,5:7]),4])
 
 AllYrGrp<-grpWide[complete.cases(grpWide[,5:7]),]
-AllYrGrp[(AllYrGrp$Yr1>AllYrGrp$Yr2)&(AllYrGrp$Yr2>=AllYrGrp$Yr3),]
+AllYrGrp$AllCold<-AllYrGrp$ColdYr1+AllYrGrp$ColdYr2+AllYrGrp$ColdYr3
 
                         
 ##Percent of samples that decreased in abundance from early time period to later time period
-n<-(-34)
+n<-(0)
 
 t1t3Desc<-dim(grpWide[which(grpWide[,5]<n),])[1]/dim(grpWide[complete.cases(grpWide[,5]),])[1]
 t1t2Desc<-dim(grpWide[which(grpWide[,6]<n),])[1]/dim(grpWide[complete.cases(grpWide[,6]),])[1]
@@ -133,7 +168,7 @@ CWFishDesc<-data.frame(TimeP=factor(c("1990s-2010s","1990s-2000s","2000s-2010s",
 names(TPColors)<-CWFishDesc$TimeP
 
 ggplot(CWFishDesc,aes(TimeP,pctDesc))+
-  geom_col(aes(fill=TimeP,alpha=0.2))+
+  geom_col(aes(fill=TimeP,alpha=0.6))+
   labs(y="Percent Decreasing")+
   ylim(0,1)+
   scale_fill_manual(values=TPColors)+
@@ -213,6 +248,23 @@ chgP4<- ggplot(cwChgBase,aes(chg,pct))+
 
 ggsave(plot=chgP4,"fishPlots/cwChgBase.jpg",width=4,height=4,units="in")
 
+
+ChgPct<-rbind(cwChgT1T3,cwChgT1T2,cwChgT2T3,cwChgBase)
+ChgPct$TP<-c("1990s-2010s","1990s-2010s","1990s-2010s","1990s-2000s","1990s-2000s",
+             "1990s-2000s","2000s-2010s","2000s-2010s","2000s-2010s","Baseline","Baseline","Baseline")
+ChgPct$TP<-factor(ChgPct$TP,levels=(c("1990s-2010s","1990s-2000s","2000s-2010s","Baseline")))
+
+
+ggplot(ChgPct[ChgPct$chg=="decreasing",],aes(TP,pct))+
+  geom_col(fill=TPColors)+
+  ylim(0,0.4)+
+  labs(y="Percent of Samples")+
+  theme(axis.title.x=element_blank())
+
+
+
+
+
 ########################################################################################################
 ###Multi-Year Temperature data #########################################################################
 ########################################################################################################
@@ -260,12 +312,14 @@ dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Yea
 summary(TempYrDiff[TempYrDiff$YrDiff<=5,6])
 quantile(TempYrDiff[TempYrDiff$YrDiff<=5,6],c(0.05,0.95))
 
-#Pct of samples that do not change cold/not cold category between combinations of samples
+#Pct of samples that remain cold between combinations of samples
 dim(TempYrDiff[TempYrDiff$ColdDiff==0&TempYrDiff$YrDiff<=5|TempYrDiff$ColdDiff==2&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
 dim(TempYrDiff[TempYrDiff$ColdDiff==0|TempYrDiff$ColdDiff==2,])[1]/dim(TempYrDiff)[1]
 
+dim(TempYrDiff[TempYrDiff$YrMaxColdDiff==(1)&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
+
 ggplot(TempYrDiff[TempYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
-  geom_histogram(binwidth=0.5,fill="blue",alpha=0.4)+
+  geom_histogram(binwidth=0.5,fill="#5ab4ac",alpha=0.7)+
   labs(x="Difference in Temp (Degree C) Between Two Years",y="Percent of Samples",
        title="Distribution of Temp Differences Between Samples Taken 5 or Less Years Apart (n=723)")
 
@@ -274,9 +328,15 @@ ggplot(TempYrDiff[TempYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..cou
 dim(TempYrDiff[TempYrDiff$YrMaxDiff<(0)&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
 dim(TempYrDiff[TempYrDiff$YrMaxDiff<(-1.2)&TempYrDiff$YrDiff<=5,])[1]/dim(TempYrDiff[TempYrDiff$YrDiff<=5,])[1]
 
+########################################################################################################
+###Prepare geospatial data##############################################################################
+########################################################################################################
+
+grpWide[complete.cases(grpWide[,5]),]
+
 
 ########################################################################################################
-###Format data for PhisViz##############################################################################
+###Format data for PhisViz / Mapping####################################################################
 ########################################################################################################
 sample_data<-merge(ftaxa,pt,by.x="OTU",by.y="Taxon_name")
 sample_data<-sample_data[sample_data$IsStocked=='FALSE',]
@@ -325,6 +385,24 @@ sample_data<-sample_data[,1:4]
 sample_data<-sample_data[order(sample_data$SID,sample_data$Collection_Date),]
 
 write.csv(sample_data,"sample_data_PV.csv",row.names=FALSE,quote=FALSE)
+
+
+###Prepare geospatial data##############################################################################
+Y1Y3Sites<-merge(grpWide[complete.cases(grpWide[,5]),],sites,by="SID")
+
+Y1Y3Sites$YLat  <- as.numeric(Y1Y3Sites$YLat)
+Y1Y3Sites$XLong  <- as.numeric(Y1Y3Sites$XLong)
+Y1Y3Sites.SP  <- SpatialPointsDataFrame(Y1Y3Sites[,c(16,15)],
+                                        Y1Y3Sites[,-c(16,15)])
+proj4string(Y1Y3Sites.SP) <- CRS("+proj=utm +zone=18 +datum=WGS84") 
+#proj4string(dataMap.SP) <- CRS("+init=epsg:4326") #WGS 84
+
+str(Y1Y3Sites.SP) # Now is class SpatialPointsDataFrame
+
+#Write as geojson
+writeOGR(Y1Y3Sites.SP,"sitesY1Y3fish",layer="Y1Y3Sites", driver='GeoJSON',overwrite_layer = TRUE)
+
+
 
 
 
