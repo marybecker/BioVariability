@@ -1,9 +1,11 @@
-setwd('P:/Projects/GitHub_Prj/BioVariability')
+setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
 
 library(ggplot2)
 library(vegan)
 library(rgdal)
 library(stringr)
+library(rnaturalearth)
+library(rnaturalearthdata)
 
 CWsum<-read.csv("data/ColdWaterSites_ColdWaterFishSum.csv",header=TRUE)
 ftaxa<-read.csv("data/FishSamplesColdWaterSites_012220.csv",header=TRUE,stringsAsFactors=FALSE)
@@ -21,19 +23,19 @@ row.names(taxa)<-taxa$SID
 taxa<-taxa[,2:53]
 
 taxa<-taxa[rowSums(taxa)>0,]
-vegdist(taxa[c("16933_2015","16933_1998"),],"bray")
-
-apply(taxa>0,1,sum)
+apply(taxa>0,1,sum)##Number of taxa occurring at each site
 
 ###################################################################################################
-TPColors=c("#e66101","#fdb863","#b2abd2","#49006a")
+TPColors=c("#e66101","#fdb863","#636363","#49006a")
 
-ggplot(CWsum,aes(YearGrp,MaxOfFishPer100M))+
-  geom_boxplot(fill=TPColors[1:3])+
-  scale_y_sqrt()+
-  labs(y="Fish Per 100 M")+
-  scale_x_discrete(labels=c("1990s","2000s","2010s"))+
-  theme(axis.title.x=element_blank())
+CWsumBP<- ggplot(CWsum,aes(YearGrp,MaxOfFishPer100M))+
+            geom_boxplot(fill=TPColors[1:3])+
+            scale_y_sqrt()+
+            labs(y="Fish Per 100 M")+
+            scale_x_discrete(labels=c("1990s","2000s","2010s"))+
+            theme(axis.title.x=element_blank())
+
+ggsave(plot=CWsumBP,"fishPlots/CWsumBP.jpg",width=5,height=5,units="in")
 
 wilcox.test(MaxOfFishPer100M~YearGrp, data=CWsum[CWsum$YearGrp=="G1"|CWsum$YearGrp=="G3",],conf.int=TRUE)
 
@@ -80,7 +82,7 @@ for (i in 1:dim(CWYrDiff)[1]){
   s2<-paste0(CWYrDiff[i,"STA_SEQ"],"_",CWYrDiff[i,"SampYr2"])
   ifelse((any(row.names(taxa)==s1)==TRUE&any(row.names(taxa)==s2)==TRUE),
          CWYrDiff$Dist[i]<-vegdist(taxa[c(s1,s2),],"bray",binary=TRUE), CWYrDiff$Dist[i]<-1)
-}
+}## Dissimilarity of community between samples
 
 ##ggplot(CWYrDiff,(aes(YrDiff,Dist)))+geom_point()
 
@@ -93,25 +95,108 @@ quantile(CWYrDiff[CWYrDiff$YrDiff<=5,6],c(0.05,0.95))
 dim(CWYrDiff[CWYrDiff$ColdDiff==0&CWYrDiff$YrDiff<=5|CWYrDiff$ColdDiff==2&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 dim(CWYrDiff[CWYrDiff$ColdDiff==0|CWYrDiff$ColdDiff==2,])[1]/dim(CWYrDiff)[1]
 
-ggplot(CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
-  geom_histogram(binwidth=15,fill=TPColors[4],alpha=0.7)+
-  labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples",
-       title="Distribution of FishPer100M Differences Between Samples Taken 5 or Less Years Apart (n=409)")+
-  xlim(-300,300)
+DiffHistBase<-  ggplot(CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
+                  geom_histogram(binwidth=15,fill=TPColors[4],alpha=0.7)+
+                  labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples",
+                       title="Distribution of FishPer100M Differences Between Samples Taken 5 or Less Years Apart (n=409)")+
+                  xlim(-300,300)
 
+DiffHist20<-  ggplot()+
+                geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>=20,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[1],alpha=0.9)+
+                geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+                labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+                xlim(-300,300)
 
+DiffHist10<-  ggplot()+
+                geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[2],alpha=0.9)+
+                geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+                labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+                xlim(-300,300)
 
-dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
-dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+DiffHist5<- ggplot()+
+              geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[3],alpha=0.9)+
+              geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+              labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+              xlim(-300,300)
 
-dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
-dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
-dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+ggsave(plot=DiffHistBase,"fishPlots/DiffHistBase.jpg",width=5,height=5,units="in")
+ggsave(plot=DiffHist20,"fishPlots/DiffHist20.jpg",width=5,height=5,units="in")
+ggsave(plot=DiffHist10,"fishPlots/DiffHist10.jpg",width=5,height=5,units="in")
+ggsave(plot=DiffHist5,"fishPlots/DiffHist5.jpg",width=5,height=5,units="in")
 
+DescBase<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+MedDescBase<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+CWDBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+CWIBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+CWSBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+ZeroBase<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff<=5),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+
+Desc20<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+MedDesc20<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+CWD20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+CWI20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+CWS20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+Zero20<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff>=20),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+
+Desc10<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+MedDesc10<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+CWD10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+CWI10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+CWS10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+Zero10<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+
+Desc5<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+MedDesc5<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+CWD5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+CWI5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+CWS5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+Zero5<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+
+CWFishMet <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs"),levels=c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs")),
+                       Desc=c(Desc20,Desc10,Desc5,DescBase),
+                       MedDesc=c(MedDesc20,MedDesc10,MedDesc5,MedDescBase),
+                       CWD=c(CWD20,CWD10,CWD5,CWDBase),
+                       CWI=c(CWI20,CWI10,CWI5,CWDBase),
+                       CWS=c(CWS20,CWS10,CWS5,CWSBase),
+                       Zero=c(Zero20,Zero10,Zero5,ZeroBase))
+
+names(TPColors)<-CWFishMet$TimeP
+
+DescP<-ggplot(CWFishMet,aes(TimeP,Desc))+
+        geom_col(aes(fill=TimeP,alpha=0.8))+
+        labs(y="Percent Decreasing")+
+        #ylim(0,1)+
+        scale_fill_manual(values=TPColors)+
+        theme(axis.title.x=element_blank(),legend.position="none")
+
+MedDescP<- ggplot(CWFishMet,aes(TimeP,MedDesc))+
+            geom_col(aes(fill=TimeP,alpha=0.8))+
+            labs(y="Percent Decreasing Greater Than Median")+
+            #ylim(0,1)+
+            scale_fill_manual(values=TPColors)+
+            theme(axis.title.x=element_blank(),legend.position="none")
+
+CWDP<-ggplot(CWFishMet,aes(TimeP,CWD))+
+        geom_col(aes(fill=TimeP,alpha=0.8))+
+        labs(y="Percent Change Cold Category (Cold to Not Cold)")+
+        #ylim(0,1)+
+        scale_fill_manual(values=TPColors)+
+        theme(axis.title.x=element_blank(),legend.position="none")
+
+ZeroP<-ggplot(CWFishMet,aes(TimeP,Zero))+
+        geom_col(aes(fill=TimeP,alpha=0.8))+
+        labs(y="Percent Change Cold Category (Cold to Not Cold)")+
+        #ylim(0,1)+
+        scale_fill_manual(values=TPColors)+
+        theme(axis.title.x=element_blank(),legend.position="none")
+
+ggsave(plot=DescP,"fishPlots/DescP.jpg",width=5,height=5,units="in")
+ggsave(plot=MedDescP,"fishPlots/MedDescP.jpg",width=5,height=5,units="in")
+ggsave(plot=CWDP,"fishPlots/CWDP.jpg",width=5,height=5,units="in")
+ggsave(plot=ZeroP,"fishPlots/ZeroP.jpg",width=5,height=5,units="in")
 
 ####################################################################################################
-
-
+##Summary of Differences by Time Period
 grpSum<-aggregate(CWsum$MaxOfFishPer100M,by=as.list(CWsum[,c("STA_SEQ","YearGrp")]),FUN=max)
 grpWide<-reshape(grpSum,idvar="STA_SEQ",timevar="YearGrp",direction="wide")
 colnames(grpWide)<-c("SID","Yr1","Yr2","Yr3")#rename columns
@@ -126,25 +211,29 @@ grpWide$ColdYr1Y2<-grpWide$ColdYr2-grpWide$ColdYr1
 grpWide$ColdYr2Yr3<-grpWide$ColdYr3-grpWide$ColdYr2
 
 ##Comparison of Distributions between samples taken within 5 year of each & Stream Survey to 2010 - 2018
-ggplot()+
-  geom_histogram(data=grpWide[complete.cases(grpWide[,5]),],aes(x=Y1Y3,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[1],alpha=0.9)+
-  geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-  xlim(-300,300)
+histYr13<-  ggplot()+
+              geom_histogram(data=grpWide[complete.cases(grpWide[,5]),],aes(x=Y1Y3,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[1],alpha=0.9)+
+              geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+              labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+              xlim(-300,300)
 
-ggplot()+
-  geom_histogram(data=grpWide[complete.cases(grpWide[,6]),],aes(x=Yr1Y2,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[2],alpha=0.9)+
-  geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-  xlim(-300,300)
-       #title="Distributions of FishPer100M Differences Between Years")
+histYr12<-  ggplot()+
+              geom_histogram(data=grpWide[complete.cases(grpWide[,6]),],aes(x=Yr1Y2,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[2],alpha=0.9)+
+              geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+              labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+              xlim(-300,300)
+                   #title="Distributions of FishPer100M Differences Between Years")
 
-ggplot()+
-  geom_histogram(data=grpWide[complete.cases(grpWide[,7]),],aes(x=Yr2Yr3,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[3],alpha=0.9)+
-  geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-  xlim(-300,300)
-       #title="Distributions of FishPer100M Differences Between Years")
+histYr23<-  ggplot()+
+              geom_histogram(data=grpWide[complete.cases(grpWide[,7]),],aes(x=Yr2Yr3,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[3],alpha=0.9)+
+              geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
+              labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
+              xlim(-300,300)
+                   #title="Distributions of FishPer100M Differences Between Years")
+
+ggsave(plot=histYr13,"fishPlots/histYr13.jpg",width=5,height=5,units="in")
+ggsave(plot=histYr12,"fishPlots/histYr12.jpg",width=5,height=5,units="in")
+ggsave(plot=histYr23,"fishPlots/histYr23.jpg",width=5,height=5,units="in")
 
 summary(grpWide[complete.cases(grpWide[,5:7]),2])
 summary(grpWide[complete.cases(grpWide[,5:7]),3])
@@ -167,12 +256,12 @@ CWFishDesc<-data.frame(TimeP=factor(c("1990s-2010s","1990s-2000s","2000s-2010s",
 
 names(TPColors)<-CWFishDesc$TimeP
 
-ggplot(CWFishDesc,aes(TimeP,pctDesc))+
-  geom_col(aes(fill=TimeP,alpha=0.6))+
-  labs(y="Percent Decreasing")+
-  ylim(0,1)+
-  scale_fill_manual(values=TPColors)+
-  theme(axis.title.x=element_blank(),legend.position="none")
+PctDescP<-  ggplot(CWFishDesc,aes(TimeP,pctDesc))+
+              geom_col(aes(fill=TimeP,alpha=0.8))+
+              labs(y="Percent Decreasing")+
+              ylim(0,1)+
+              scale_fill_manual(values=TPColors)+
+              theme(axis.title.x=element_blank(),legend.position="none")
 
 ##Percent of samples that decreased to zero CW Fish from early time period to later time period
 t1t3Zero<-dim(grpWide[which(grpWide$Yr1>0&grpWide$Yr3==0),])[1]/dim(grpWide[complete.cases(grpWide[,5]),])[1]
@@ -402,12 +491,30 @@ str(Y1Y3Sites.SP) # Now is class SpatialPointsDataFrame
 #Write as geojson
 writeOGR(Y1Y3Sites.SP,"sitesY1Y3fish",layer="Y1Y3Sites", driver='GeoJSON',overwrite_layer = TRUE)
 
+###CWYrDiff 20 For Mapping #############################################################
+sites<-read.csv("sites.csv",header=TRUE)
+colnames(sites)[1]<-"STA_SEQ"
+CWYrDiff20<-CWYrDiff[CWYrDiff$YrDiff>=20,]
+CWYrDiff20sites<-aggregate(CWFishYr1~STA_SEQ,data=CWYrDiff20,FUN=max)
+CWYrDiff20<-merge(CWYrDiff20sites,CWYrDiff20,by=c("STA_SEQ","CWFishYr1"))
+table(CWYrDiff20$STA_SEQ)
+write.csv(CWYrDiff20,"CWYrDiff20.csv",row.names=FALSE)
 
 
+CWYrDiff20sites<-merge(CWYrDiff20sites,sites,by="STA_SEQ")
+CWYrDiff20sites<-CWYrDiff20sites[,c(1,3:5)]
 
+CWYrDiff20sites$YLat  <- as.numeric(CWYrDiff20sites$YLat)
+CWYrDiff20sites$XLong  <- as.numeric(CWYrDiff20sites$XLong)
+CWYrDiff20sites.SP  <- SpatialPointsDataFrame(CWYrDiff20sites[,c(4,3)],
+                                              CWYrDiff20sites[,-c(4,3)])
+proj4string(CWYrDiff20sites.SP) <- CRS("+proj=utm +zone=18 +datum=WGS84") 
+#proj4string(dataMap.SP) <- CRS("+init=epsg:4326") #WGS 84
 
+str(CWYrDiff20sites.SP) # Now is class SpatialPointsDataFrame
 
-
+#Write as geojson
+writeOGR(CWYrDiff20sites.SP,"CWYrDiff20sites.geojson",layer="CWYrDiff20sites", driver='GeoJSON',overwrite_layer = TRUE)
 
 
 
