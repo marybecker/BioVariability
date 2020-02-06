@@ -1,4 +1,4 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd('P:/Projects/GitHub_Prj/BioVariability')
 
 library(ggplot2)
 library(vegan)
@@ -37,7 +37,7 @@ CWsumBP<- ggplot(CWsum,aes(YearGrp,MaxOfFishPer100M))+
 
 ggsave(plot=CWsumBP,"fishPlots/CWsumBP.jpg",width=5,height=5,units="in")
 
-wilcox.test(MaxOfFishPer100M~YearGrp, data=CWsum[CWsum$YearGrp=="G1"|CWsum$YearGrp=="G3",],conf.int=TRUE)
+wilcox.test(MaxOfFishPer100M~YearGrp, data=CWsum[CWsum$YearGrp=="G1"|CWsum$YearGrp=="G2",],conf.int=TRUE)
 
 ##Identify all possible combinations of the same site in different years for comparison
 CW<-CWsum[,1:3]
@@ -87,9 +87,29 @@ for (i in 1:dim(CWYrDiff)[1]){
 ##ggplot(CWYrDiff,(aes(YrDiff,Dist)))+geom_point()
 
 #Summary stats of differences in samples taken within 5 Years apart
-dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
-summary(CWYrDiff[CWYrDiff$YrDiff<=5,6])
-quantile(CWYrDiff[CWYrDiff$YrDiff<=5,6],c(0.05,0.95))
+nbase<-dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
+statbase<-summary(CWYrDiff[CWYrDiff$YrDiff<=5,6])
+quantbase<-quantile(CWYrDiff[CWYrDiff$YrDiff<=5,6],c(0.05,0.95))
+
+n20<-dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]#n combinations of samples 20 Years apart
+stat20<-summary(CWYrDiff[CWYrDiff$YrDiff>=20,6])
+quant20<-quantile(CWYrDiff[CWYrDiff$YrDiff>=20,6],c(0.05,0.95))
+
+n10<-dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]#n combinations of samples 10 Years apart
+stat10<-summary(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,6])
+quant10<-quantile(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,6],c(0.05,0.95))
+
+n5<-dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]#n combinations of samples 5-10 Years apart
+stat5<-summary(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,6])
+quant5<-quantile(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,6],c(0.05,0.95))
+
+CWFishStat <-as.data.frame(rbind(statbase,stat20,stat10,stat5))
+CWFishStat$TimeP<-c("5 Yrs","20-30 Yrs","10-20 Yrs","5-10 Yrs")
+CWFishStat$N<-c(nbase,n20,n10,n5)
+quant<-rbind(quantbase,quant20,quant10,quant5)
+CWFishStat<-cbind(CWFishStat,quant)
+write.csv(CWFishStat,"fishPlots/CWFishStat.csv",row.names=FALSE)
+                        
 
 #Pct of samples that do not change cold/not cold category between combinations of samples
 dim(CWYrDiff[CWYrDiff$ColdDiff==0&CWYrDiff$YrDiff<=5|CWYrDiff$ColdDiff==2&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
@@ -97,8 +117,7 @@ dim(CWYrDiff[CWYrDiff$ColdDiff==0|CWYrDiff$ColdDiff==2,])[1]/dim(CWYrDiff)[1]
 
 DiffHistBase<-  ggplot(CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
                   geom_histogram(binwidth=15,fill=TPColors[4],alpha=0.7)+
-                  labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples",
-                       title="Distribution of FishPer100M Differences Between Samples Taken 5 or Less Years Apart (n=409)")+
+                  labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples")+
                   xlim(-300,300)
 
 DiffHist20<-  ggplot()+
@@ -185,7 +204,7 @@ CWDP<-ggplot(CWFishMet,aes(TimeP,CWD))+
 
 ZeroP<-ggplot(CWFishMet,aes(TimeP,Zero))+
         geom_col(aes(fill=TimeP,alpha=0.8))+
-        labs(y="Percent Change Cold Category (Cold to Not Cold)")+
+        labs(y="Percent Change (Cold Water Fish to Zero Cold Water Fish)")+
         #ylim(0,1)+
         scale_fill_manual(values=TPColors)+
         theme(axis.title.x=element_blank(),legend.position="none")
