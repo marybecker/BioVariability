@@ -88,27 +88,27 @@ for (i in 1:dim(CWYrDiff)[1]){
 
 #Summary stats of differences in samples taken within 5 Years apart
 nbase<-dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
-statbase<-summary(CWYrDiff[CWYrDiff$YrDiff<=5,6])
-quantbase<-quantile(CWYrDiff[CWYrDiff$YrDiff<=5,6],c(0.05,0.95))
+statbase<-summary(CWYrDiff[CWYrDiff$YrDiff<=5,12])
+quantbase<-quantile(CWYrDiff[CWYrDiff$YrDiff<=5,12],c(0.05,0.95))
 
 n20<-dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]#n combinations of samples 20 Years apart
-stat20<-summary(CWYrDiff[CWYrDiff$YrDiff>=20,6])
-quant20<-quantile(CWYrDiff[CWYrDiff$YrDiff>=20,6],c(0.05,0.95))
+stat20<-summary(CWYrDiff[CWYrDiff$YrDiff>=20,12])
+quant20<-quantile(CWYrDiff[CWYrDiff$YrDiff>=20,12],c(0.05,0.95))
 
 n10<-dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]#n combinations of samples 10 Years apart
-stat10<-summary(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,6])
-quant10<-quantile(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,6],c(0.05,0.95))
+stat10<-summary(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,12])
+quant10<-quantile(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,12],c(0.05,0.95))
 
 n5<-dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]#n combinations of samples 5-10 Years apart
-stat5<-summary(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,6])
-quant5<-quantile(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,6],c(0.05,0.95))
+stat5<-summary(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,12])
+quant5<-quantile(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,12],c(0.05,0.95))
 
 CWFishStat <-as.data.frame(rbind(statbase,stat20,stat10,stat5))
 CWFishStat$TimeP<-c("5 Yrs","20-30 Yrs","10-20 Yrs","5-10 Yrs")
 CWFishStat$N<-c(nbase,n20,n10,n5)
 quant<-rbind(quantbase,quant20,quant10,quant5)
 CWFishStat<-cbind(CWFishStat,quant)
-write.csv(CWFishStat,"fishPlots/CWFishStat.csv",row.names=FALSE)
+write.csv(CWFishStat,"fishPlots/CWFishStatDiff.csv",row.names=FALSE)
                         
 
 #Pct of samples that do not change cold/not cold category between combinations of samples
