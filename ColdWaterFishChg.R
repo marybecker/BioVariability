@@ -1,4 +1,4 @@
-setwd('P:/Projects/GitHub_Prj/BioVariability')
+setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
 
 library(ggplot2)
 library(vegan)

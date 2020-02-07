@@ -1,6 +1,6 @@
 var options = {
-    center: [41.6032, -73.0877],
-    zoom: 9,
+    center: [41.6, -72.6],
+    zoom: 10,
     zoomControl: false
 };
 
@@ -8,7 +8,7 @@ var map = L.map('map', options);
 
 // add zoom control to top right window position
 L.control.zoom({
-    position: 'topright'
+    position: 'topleft'
 }).addTo(map);
 
 // Get basemap URL from Leaflet Providers
@@ -21,7 +21,7 @@ var basemap_attributes = {
     maxZoom: 19
 };
 // requests some map tiles
-var tiles = L.tileLayer(basemap_url, basemap_attributes).addTo(map);;
+var tiles = L.tileLayer(basemap_url, basemap_attributes).addTo(map);
 
 //define common styles for all circle markers
 var commonStyles = {
@@ -30,22 +30,38 @@ var commonStyles = {
     fillOpacity: .8
 };
 
+var breaks = [-452,-60,-20,0,20,60,260];
+
 function getRadius (area){
-    var radius = Math.sqrt(area/Math.PI);
-    return radius * 1.7;
+    var r = get_bin([area],bins=breaks)[0];
+    var R = {0:12,1:10,3:8,4:6,5:4,6:2};
+    return R[r];
 }
 
-// function getSize (d){
-//     if (d > )
-// }
+
+ function get_bin(data,bins=[-134,-37,-13,0,16,51,263]){
+    var B = [];
+    for(var i = 0; i<data.length; i++){
+        for(var b=1; b<bins.length; b++){
+            if(data[i]>=bins[b-1] && data[i]<bins[b]){
+                B.push(b);
+            }
+         }
+     }
+    return B;
+ }
+
+var color = [   [-1,'Cold to Not Cold','#018571'],
+                [0,'Stable','#f5f5f5'],
+                [1,'Not Cold to Cold','#dfc27d']];
 
 function getColor (d){
-        if  (d == -1){
-            return "#018571"
-        }if  (d == 0){
-            return "#f5f5f5"
-        }if (d == 1){
-            return "#dfc27d"
+        if  (d == color[0][0]){
+            return color[0][2]
+        }if  (d == color[1][0]){
+            return color[1][2]
+        }if (d == color[2][0]){
+            return color[2][2]
         }
 }
 
@@ -96,4 +112,22 @@ var geojson =
         }
     }).addTo(map);
 
+function drawLegend (color){
+    var legend = L.control({position: 'topright'});
+    legend.onAdd = function(){
+        var div = L.DomUtil.create('div','legend');
+        div.innerHTML = "<h3>" +'CW Fish Diff'+ "</h3>";
+        for (var i = 0; i < color.length; i++) {
+            var c = getColor(color[i][0], color);
+            div.innerHTML +=
+                '<span style="background:' + c + '"></span> ' +
+                '<label>'+(color[i][1]).toLocaleString()+ '</label>';
+        }
+
+        return div;
+    };
+    legend.addTo(map);
+}
+
+drawLegend(color);
 
