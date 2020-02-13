@@ -1,4 +1,4 @@
-setwd("P:/Projects/GitHub_Prj/BioVariability")
+setwd("/home/mkozlak/Documents/Projects/GitHub/BioVariability")
 
 library(ggplot2)
 library(vegan)
@@ -64,68 +64,90 @@ BCGYrDiff<-merge(BCGYrDiff,BugYrDiff,by=c("STA_SEQ","SampYr1","SampYr2"))
 BCGYrDiff$BugDiff<-BCGYrDiff$BugYr1-BCGYrDiff$BugYr2
 BCGYrDiff$YrDiff<-BCGYrDiff$SampYr1-BCGYrDiff$SampYr2
 BCGYrDiff$BCGDiff<-BCGYrDiff$BCGYr1-BCGYrDiff$BCGYr2
+BCGYrDiff$ABSBugDiff<-abs(BCGYrDiff$BugYr1-BCGYrDiff$BugYr2)
 
-
+summary(BCGYrDiff[BCGYrDiff$YrDiff<=5,11])
 ####NEEDS WORK**************################################################
 DescBase<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(0)&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
-MedDescBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(-14)&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
-BCGDBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<0&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
-BCGIBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>0&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
+MedDescBase<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(-0.1)&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
+BCGDBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(0)&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
+BCGIBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>1&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
 BCGSBase<- dim(BCGYrDiff[BCGYrDiff$BCGDiff==0&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
 
 
 Desc20<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(0)&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
-MedDesc20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(-14)&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
-BCGD20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<0&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
-BCGI20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>0&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
+MedDesc20<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(-0.1)&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
+BCGD20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(0)&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
+BCGI20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>1&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
 BCGS20<- dim(BCGYrDiff[BCGYrDiff$BCGDiff==0&BCGYrDiff$YrDiff>=20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=20,])[1]
 
 
 Desc10<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(0)&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
-MedDesc10<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(-14)&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
+MedDesc10<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(-0.1)&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
 BCGD10<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<0&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
-BCGI10<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>0&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
+BCGI10<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>1&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
 BCGS10<- dim(BCGYrDiff[BCGYrDiff$BCGDiff==0&BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,])[1]
 
 
 Desc5<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(0)&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
-MedDesc5<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<(-14)&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
+MedDesc5<- dim(BCGYrDiff[BCGYrDiff$BugDiff<(-0.1)&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
 BCGD5<- dim(BCGYrDiff[BCGYrDiff$BCGDiff<0&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
-BCGI5<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>0&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
+BCGI5<- dim(BCGYrDiff[BCGYrDiff$BCGDiff>1&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
 BCGS5<- dim(BCGYrDiff[BCGYrDiff$BCGDiff==0&BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,])[1]
 
 
-CWFishMet <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs"),levels=c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs")),
+BCGMet <- data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs"),levels=c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs")),
                        Desc=c(Desc20,Desc10,Desc5,DescBase),
                        MedDesc=c(MedDesc20,MedDesc10,MedDesc5,MedDescBase),
                        BCGD=c(BCGD20,BCGD10,BCGD5,BCGDBase),
                        BCGI=c(BCGI20,BCGI10,BCGI5,BCGIBase),
                        BCGS=c(BCGS20,BCGS10,BCGS5,BCGSBase))
 
+names(TPColors)<-BCGMet$TimeP
 
+DescP<-ggplot(BCGMet,aes(TimeP,Desc))+
+  geom_col(aes(fill=TimeP,alpha=0.8))+
+  labs(y="Percent Decreasing")+
+  #ylim(0,1)+
+  scale_fill_manual(values=TPColors)+
+  theme(axis.title.x=element_blank(),legend.position="none")
+
+MedDescP<- ggplot(BCGMet,aes(TimeP,MedDesc))+
+  geom_col(aes(fill=TimeP,alpha=0.8))+
+  labs(y="Percent Decreasing Greater Than Median")+
+  #ylim(0,1)+
+  scale_fill_manual(values=TPColors)+
+  theme(axis.title.x=element_blank(),legend.position="none")
+
+BCGDP<-ggplot(BCGMet,aes(TimeP,BCGI))+
+  geom_col(aes(fill=TimeP,alpha=0.8))+
+  labs(y="Percent Change of BCG Increase")+
+  #ylim(0,1)+
+  scale_fill_manual(values=TPColors)+
+  theme(axis.title.x=element_blank(),legend.position="none")
 
 
 DiffHistBase<-  ggplot(BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BugDiff,y=(..count..)/sum(..count..)))+
   geom_histogram(binwidth=0.1,fill=TPColors[4],alpha=0.7)+
-  labs(x="Difference in BCG Between Two Years",y="Percent of Samples")+
+  labs(x="Difference in Taxa Rel Abundance Between Two Years",y="Percent of Samples")+
   xlim(-0.6,0.6)
 
 DiffHist20<-  ggplot()+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>=20,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.05,fill=TPColors[1],alpha=0.9)+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.05,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in BCG Between Two Samples",y="Percent of Samples")+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Percent of Samples")+
   xlim(-0.6,0.6)
 
 DiffHist10<-  ggplot()+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.05,fill=TPColors[2],alpha=0.9)+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.05,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in BCG Between Two Samples",y="Percent of Samples")+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Percent of Samples")+
   xlim(-0.6,0.6)
 
 DiffHist5<- ggplot()+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.1,fill=TPColors[3],alpha=0.9)+
   geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BugDiff,y=(..count..)/sum(..count..)),binwidth=0.1,fill=TPColors[4],alpha=0.4)+
-  labs(x="Difference in BCG Between Two Samples",y="Percent of Samples")+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Percent of Samples")+
   xlim(-0.6,0.6)
 
 #Pct of samples that do not change cold/not cold category between combinations of samples
