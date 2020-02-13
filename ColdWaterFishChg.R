@@ -1,4 +1,4 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd('P:/Projects/GitHub_Prj/BioVariability')
 
 library(ggplot2)
 library(vegan)
@@ -12,6 +12,7 @@ ftaxa<-read.csv("data/FishSamplesColdWaterSites_012220.csv",header=TRUE,stringsA
 ftaxa$OTU<-ifelse(ftaxa$IsStocked==TRUE,paste0(ftaxa$OTU,"-STK"),ftaxa$OTU)
 pt<-read.csv("data/phylo_tree.csv",header=TRUE)
 temp<-read.csv("data/CWSite_HOBOdata.csv",header=TRUE)
+env<-read.csv("data/fishSites_env.csv",header=TRUE)
 
 taxa<-ftaxa
 taxa$SID<-paste0(taxa$STA_SEQ,"_",taxa$SampleYr)
@@ -369,9 +370,33 @@ ggplot(ChgPct[ChgPct$chg=="decreasing",],aes(TP,pct))+
   labs(y="Percent of Samples")+
   theme(axis.title.x=element_blank())
 
+###########CW ENV######################################################################################
 
+envCWD<-merge(CWYrDiff,env,by="STA_SEQ")
 
+allYr<-grpWide[complete.cases(grpWide),]
+envallYr<-merge(env,allYr,by.x="STA_SEQ",by.y="SID")
+envallYr$ColdAll<-envallYr$ColdYr1+envallYr$ColdYr2+envallYr$ColdYr3
 
+ggplot(envallYr,aes(as.factor(ColdAll),DivQ99))+
+  geom_boxplot()+
+  scale_y_log10()
+
+ggplot(envCWD[envCWD$YrDiff>=20,],aes(as.factor(YrMaxColdDiff),DivQ99))+
+  geom_boxplot()+
+  scale_y_log10()
+
+ggplot(envCWD[envCWD$YrDiff>=20,],aes(YrMaxDiff,DivQ99))+
+  geom_point()+
+  lims(x=c(-50,50))+
+  scale_y_log10()
+
+dim(envallYr[envallYr$ColdAll==1&envallYr$Div>0,])[1]/dim(envallYr[envallYr$ColdAll==1,])[1]
+
+dim(envCWD[envCWD$YrDiff>=20&envCWD$YrMaxColdDiff==-1&envCWD$Div>0,])[1]/dim(envCWD[envCWD$YrDiff>=20&envCWD$YrMaxColdDiff==-1,])[1]
+dim(envCWD[envCWD$YrDiff>=20&envCWD$YrMaxColdDiff==0&envCWD$Div>0,])[1]/dim(envCWD[envCWD$YrDiff>=20&envCWD$YrMaxColdDiff==0,])[1]
+
+  
 
 ########################################################################################################
 ###Multi-Year Temperature data #########################################################################
