@@ -1,4 +1,4 @@
-setwd('/home/mkozlak/Documents/Projects/GitHub/BioVariability')
+setwd("P:/Projects/GitHub_Prj/BioVariability")
 
 library(ggplot2)
 library(vegan)
@@ -27,7 +27,7 @@ taxa<-taxa[rowSums(taxa)>0,]
 apply(taxa>0,1,sum)##Number of taxa occurring at each site
 
 ###################################################################################################
-TPColors=c("#e66101","#fdb863","#636363","#49006a")
+TPColors=c("#a6611a","#404040","#018571","#49006a")
 
 CWsumBP<- ggplot(CWsum,aes(YearGrp,MaxOfFishPer100M))+
             geom_boxplot(fill=TPColors[1:3])+
@@ -218,7 +218,7 @@ CWFishMet2 <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs
                         Lab=c("Decrease","Decrease","Decrease","Decrease",
                               "Increase","Increase","Increase","Increase",
                               "Stable", "Stable", "Stable", "Stable"),
-                       Met=c(CWD20,CWD10,CWD5,CWDBase,CWI20,CWI10,CWI5,CWDBase,CWS20,CWS10,CWS5,CWSBase))
+                       Met=c(CWD20,CWD10,CWD5,CWDBase,CWI20,CWI10,CWI5,CWIBase,CWS20,CWS10,CWS5,CWSBase))
 
 ggplot(CWFishMet2,aes(x=TimeP,y=Met,fill=Lab))+
   geom_bar(position="fill",stat="identity")+

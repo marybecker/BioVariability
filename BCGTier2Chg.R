@@ -1,4 +1,4 @@
-setwd("/home/mkozlak/Documents/Projects/GitHub/BioVariability")
+setwd("P:/Projects/GitHub_Prj/BioVariability")
 
 library(ggplot2)
 library(vegan)
@@ -153,3 +153,41 @@ DiffHist5<- ggplot()+
 #Pct of samples that do not change cold/not cold category between combinations of samples
 dim(BCGYrDiff[BCGYrDiff$BugDiff==0&BCGYrDiff$YrDiff<=5|BCGYrDiff$BugDiff==2&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
 dim(BCGYrDiff[BCGYrDiff$BugDiff==0|BCGYrDiff$BugDiff==2,])[1]/dim(BCGYrDiff)[1]
+
+
+###SlopeGraph##############################################################################
+
+BCGMet2 <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs",
+                                       "20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs",
+                                       "20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs"),
+                                     levels=c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs")),
+                        Lab=c("Decrease","Decrease","Decrease","Decrease",
+                              "Increase","Increase","Increase","Increase",
+                              "Stable", "Stable", "Stable", "Stable"),
+                        Met=c(BCGD20,BCGD10,BCGD5,BCGDBase,BCGI20,BCGI10,BCGI5,BCGIBase,BCGS20,BCGS10,BCGS5,BCGSBase))
+
+ggplot(BCGMet2,aes(x=TimeP,y=Met,fill=Lab))+
+  geom_bar(position="fill",stat="identity")+
+  scale_y_continuous(labels=scales::percent_format())+
+  scale_fill_manual(values=c("#a6611a","#404040","#018571"))+
+  coord_flip()+
+  annotate("text",x=c(4.5,4.5,4.5),y=c(0.1,0.77,0.93),label=c("Stable","Increase","Decrease"))+
+  theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
+        axis.title=element_blank(),text=element_text(size=12,family="Sans"))
+
+ggplot(BCGMet2)+
+  geom_line(aes(TimeP,Met*100,group=Lab,colour=Lab),size=2)+
+  geom_point(aes(TimeP,Met*100,group=Lab),colour="white",size=6)+
+  geom_text(data=BCGMet2[BCGMet2$TimeP=="10-20 Yrs",],
+            aes(x=0,y=Met*100,label=c("Cold to Not Cold","Not Cold to Cold","Stable"),colour=Lab),hjust=0)+
+  geom_text(data=CWFishMet2[CWFishMet2$Lab=="Decrease"|
+                              CWFishMet2$Lab=="Stable",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=-1)+
+  geom_text(data=CWFishMet2[CWFishMet2$Lab=="Increase",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=1.5)+
+  scale_x_discrete(position = "top")+ 
+  scale_color_manual(values=c("#a6611a","#404040","#018571"))+
+  labs(x="Number of Years Between Samples\n")+
+  lims(y=c(0,80))+
+  theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
+        axis.title.y=element_blank(),text=element_text(size=16,family="Sans"),
+        axis.text.x=element_text(colour="black"),axis.ticks.length = unit(.5, "cm"),
+        axis.ticks.y=element_blank(),axis.text.y=element_blank())
