@@ -91,24 +91,29 @@ for (i in 1:dim(CWYrDiff)[1]){
 nbase<-dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
 statbase<-summary(CWYrDiff[CWYrDiff$YrDiff<=5,12])
 quantbase<-quantile(CWYrDiff[CWYrDiff$YrDiff<=5,12],c(0.05,0.95))
+stdevbase<-sd(CWYrDiff[CWYrDiff$YrDiff<=5,12])
 
 n20<-dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]#n combinations of samples 20 Years apart
 stat20<-summary(CWYrDiff[CWYrDiff$YrDiff>=20,12])
 quant20<-quantile(CWYrDiff[CWYrDiff$YrDiff>=20,12],c(0.05,0.95))
+stdev20<-sd(CWYrDiff[CWYrDiff$YrDiff>=20,12])
 
 n10<-dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]#n combinations of samples 10 Years apart
 stat10<-summary(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,12])
 quant10<-quantile(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,12],c(0.05,0.95))
+stdev10<-sd(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,12])
 
 n5<-dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]#n combinations of samples 5-10 Years apart
 stat5<-summary(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,12])
 quant5<-quantile(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,12],c(0.05,0.95))
+stdev5<-sd(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,12])
 
 CWFishStat <-as.data.frame(rbind(statbase,stat20,stat10,stat5))
 CWFishStat$TimeP<-c("5 Yrs","20-30 Yrs","10-20 Yrs","5-10 Yrs")
 CWFishStat$N<-c(nbase,n20,n10,n5)
 quant<-rbind(quantbase,quant20,quant10,quant5)
-CWFishStat<-cbind(CWFishStat,quant)
+stdev<-rbind(stdevbase,stdev20,stdev10,stdev5)
+CWFishStat<-cbind(CWFishStat,quant,stdev)
 write.csv(CWFishStat,"fishPlots/CWFishStatDiff.csv",row.names=FALSE)
                         
 
@@ -118,26 +123,30 @@ dim(CWYrDiff[CWYrDiff$ColdDiff==0|CWYrDiff$ColdDiff==2,])[1]/dim(CWYrDiff)[1]
 
 DiffHistBase<-  ggplot(CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)))+
                   geom_histogram(binwidth=15,fill=TPColors[4],alpha=0.7)+
-                  labs(x="Difference in FishPer100M Between Two Years",y="Percent of Samples")+
-                  xlim(-300,300)
+                  labs(x="Difference in FishPer100M Between Two Years",y="Proportion of Samples")+
+                  xlim(-300,300)+
+                  theme(panel.background = element_rect(fill = "white", colour = "grey"))
 
 DiffHist20<-  ggplot()+
                 geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>=20,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[1],alpha=0.9)+
                 geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-                labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-                xlim(-300,300)
+                labs(x="Difference in FishPer100M Between Two Samples",y="Proportion of Samples")+
+                xlim(-300,300)+
+                theme(panel.background = element_rect(fill = "white", colour = "grey"))
 
 DiffHist10<-  ggplot()+
                 geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[2],alpha=0.9)+
                 geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-                labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-                xlim(-300,300)
+                labs(x="Difference in FishPer100M Between Two Samples",y="Proportion of Samples")+
+                xlim(-300,300)+
+                theme(panel.background = element_rect(fill = "white", colour = "grey"))
 
 DiffHist5<- ggplot()+
               geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[3],alpha=0.9)+
               geom_histogram(data=CWYrDiff[CWYrDiff$YrDiff<=5,],aes(x=YrMaxDiff,y=(..count..)/sum(..count..)),binwidth=15,fill=TPColors[4],alpha=0.4)+
-              labs(x="Difference in FishPer100M Between Two Samples",y="Percent of Samples")+
-              xlim(-300,300)
+              labs(x="Difference in FishPer100M Between Two Samples",y="Proportion of Samples")+
+              xlim(-300,300)+
+              theme(panel.background = element_rect(fill = "white", colour = "grey"))
 
 ggsave(plot=DiffHistBase,"fishPlots/DiffHistBase.jpg",width=5,height=5,units="in")
 ggsave(plot=DiffHist20,"fishPlots/DiffHist20.jpg",width=5,height=5,units="in")
@@ -145,28 +154,28 @@ ggsave(plot=DiffHist10,"fishPlots/DiffHist10.jpg",width=5,height=5,units="in")
 ggsave(plot=DiffHist5,"fishPlots/DiffHist5.jpg",width=5,height=5,units="in")
 
 DescBase<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
-MedDescBase<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
+MedDescBase<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-40)&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 CWDBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 CWIBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 CWSBase<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff<=5,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 ZeroBase<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff<=5),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff<=5,])[1]
 
 Desc20<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
-MedDesc20<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
+MedDesc20<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-40)&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
 CWD20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
 CWI20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
 CWS20<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>=20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
 Zero20<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff>=20),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=20,])[1]
 
 Desc10<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
-MedDesc10<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
+MedDesc10<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-40)&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
 CWD10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
 CWI10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
 CWS10<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
 Zero10<-dim(CWYrDiff[which(CWYrDiff$CWFishMinYr>0&CWYrDiff$CWFishMaxYr==0&CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20),])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,])[1]
 
 Desc5<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(0)&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
-MedDesc5<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-14)&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
+MedDesc5<- dim(CWYrDiff[CWYrDiff$YrMaxDiff<(-40)&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
 CWD5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==-1&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
 CWI5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==1&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
 CWS5<- dim(CWYrDiff[CWYrDiff$YrMaxColdDiff==0&CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]/dim(CWYrDiff[CWYrDiff$YrDiff>5&CWYrDiff$YrDiff<10,])[1]
@@ -183,32 +192,40 @@ CWFishMet <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs"
 names(TPColors)<-CWFishMet$TimeP
 
 DescP<-ggplot(CWFishMet,aes(TimeP,Desc))+
-        geom_col(aes(fill=TimeP,alpha=0.8))+
-        labs(y="Percent Decreasing")+
+        geom_col(aes(fill=TimeP,alpha=1))+
+        labs(y="Proportion Decreasing")+
         #ylim(0,1)+
         scale_fill_manual(values=TPColors)+
-        theme(axis.title.x=element_blank(),legend.position="none")
+        geom_text(aes(label=round(Desc,2)),position=position_dodge(width=0.9),vjust=-0.25)+
+        theme(axis.title.x=element_blank(),legend.position="none",
+              panel.background = element_rect(fill = "white", colour = "grey"))
 
 MedDescP<- ggplot(CWFishMet,aes(TimeP,MedDesc))+
-            geom_col(aes(fill=TimeP,alpha=0.8))+
-            labs(y="Percent Decreasing Greater Than Median")+
+            geom_col(aes(fill=TimeP,alpha=1))+
+            labs(y="Proprotion Decreasing Greater Than One Standard Deviation")+
             #ylim(0,1)+
             scale_fill_manual(values=TPColors)+
-            theme(axis.title.x=element_blank(),legend.position="none")
+            geom_text(aes(label=round(MedDesc,2)),position=position_dodge(width=0.9),vjust=-0.25)+
+            theme(axis.title.x=element_blank(),legend.position="none",
+                  panel.background = element_rect(fill = "white", colour = "grey"))
 
 CWDP<-ggplot(CWFishMet,aes(TimeP,CWD))+
-        geom_col(aes(fill=TimeP,alpha=0.8))+
+        geom_col(aes(fill=TimeP,alpha=1))+
         labs(y="Percent Change Cold Category (Cold to Not Cold)")+
         #ylim(0,1)+
+        geom_text(aes(label=round(CWD,2)),position=position_dodge(width=0.9),vjust=-0.25)+
         scale_fill_manual(values=TPColors)+
-        theme(axis.title.x=element_blank(),legend.position="none")
+        theme(axis.title.x=element_blank(),legend.position="none",
+              panel.background = element_rect(fill = "white", colour = "grey"))
 
 ZeroP<-ggplot(CWFishMet,aes(TimeP,Zero))+
-        geom_col(aes(fill=TimeP,alpha=0.8))+
-        labs(y="Percent Change (Cold Water Fish to Zero Cold Water Fish)")+
+        geom_col(aes(fill=TimeP,alpha=1))+
+        labs(y="Proportion of Change to Zero Cold Water Fish")+
+        geom_text(aes(label=round(Zero,2)),position=position_dodge(width=0.9),vjust=-0.25)+
         #ylim(0,1)+
         scale_fill_manual(values=TPColors)+
-        theme(axis.title.x=element_blank(),legend.position="none")
+        theme(axis.title.x=element_blank(),legend.position="none",
+              panel.background = element_rect(fill = "white", colour = "grey"))
 
 
 CWFishMet2 <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs",
@@ -220,39 +237,47 @@ CWFishMet2 <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs
                               "Stable", "Stable", "Stable", "Stable"),
                        Met=c(CWD20,CWD10,CWD5,CWDBase,CWI20,CWI10,CWI5,CWIBase,CWS20,CWS10,CWS5,CWSBase))
 
-ggplot(CWFishMet2,aes(x=TimeP,y=Met,fill=Lab))+
-  geom_bar(position="fill",stat="identity")+
-  scale_y_continuous(labels=scales::percent_format())+
-  scale_fill_manual(values=c("#a6611a","#404040","#018571"))+
-  coord_flip()+
-  annotate("text",x=c(4.5,4.5,4.5),y=c(0.1,0.77,0.93),label=c("Stable","Increase","Decrease"))+
-  theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
-        axis.title=element_blank(),text=element_text(size=12,family="Sans"))
 
-ggplot(CWFishMet2)+
-  geom_line(aes(TimeP,Met*100,group=Lab,colour=Lab),size=2)+
-  geom_point(aes(TimeP,Met*100,group=Lab),colour="white",size=6)+
-  geom_text(data=CWFishMet2[CWFishMet2$TimeP=="10-20 Yrs",],
-            aes(x=0,y=Met*100,label=c("Cold to Not Cold","Not Cold to Cold","Stable"),colour=Lab),hjust=0)+
-  geom_text(data=CWFishMet2[CWFishMet2$Lab=="Decrease"|
-                              CWFishMet2$Lab=="Stable",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=-1)+
-  geom_text(data=CWFishMet2[CWFishMet2$Lab=="Increase",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=1.5)+
-  scale_x_discrete(position = "top")+ 
-  scale_color_manual(values=c("#a6611a","#404040","#018571"))+
-  labs(x="Number of Years Between Samples\n")+
-  lims(y=c(0,80))+
-  theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
-        axis.title.y=element_blank(),text=element_text(size=16,family="Sans"),
-          axis.text.x=element_text(colour="black"),axis.ticks.length = unit(.5, "cm"),
-        axis.ticks.y=element_blank(),axis.text.y=element_blank())
-  
-  
+
+fishMet2<-  ggplot(CWFishMet2)+
+              geom_line(aes(TimeP,Met*100,group=Lab,colour=Lab),size=1)+
+              geom_point(aes(TimeP,Met*100,group=Lab),colour="white",size=6)+
+              geom_text(data=CWFishMet2[CWFishMet2$TimeP=="10-20 Yrs",],
+                        aes(x=0,y=Met*100,label=c("Cold to Not Cold","Not Cold to Cold","No Change"),colour=Lab),hjust=0)+
+              geom_text(data=CWFishMet2[CWFishMet2$Lab=="Decrease"|
+                                          CWFishMet2$Lab=="Stable",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=-1)+
+              geom_text(data=CWFishMet2[CWFishMet2$Lab=="Increase",],aes(x=TimeP,y=Met*100,label=round(Met*100,0)),vjust=1.5)+
+              scale_x_discrete(position = "top")+ 
+              scale_color_manual(values=c("#a6611a","#404040","#018571"))+
+              labs(x="Number of Years Between Samples\n")+
+              lims(y=c(0,80))+
+              theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
+                    axis.title.y=element_blank(),text=element_text(size=16,family="Sans"),
+                      axis.text.x=element_text(colour="black"),axis.ticks.length = unit(.5, "cm"),
+                    axis.ticks.y=element_blank(),axis.text.y=element_blank())
+
+#Alt Fish Met Plot using horizontal bar        
+# ggplot(CWFishMet2,aes(x=TimeP,y=Met,fill=Lab))+
+#   geom_bar(position="fill",stat="identity")+
+#   scale_y_continuous(labels=scales::percent_format())+
+#   scale_fill_manual(values=c("#a6611a","#404040","#018571"))+
+#   coord_flip()+
+#   annotate("text",x=c(4.5,4.5,4.5),y=c(0.1,0.77,0.93),label=c("Stable","Increase","Decrease"))+
+#   theme(legend.position = "none",panel.background = element_rect(fill = "white", colour = "white"),
+#         axis.title=element_blank(),text=element_text(size=12,family="Sans")) 
   
 
 ggsave(plot=DescP,"fishPlots/DescP.jpg",width=5,height=5,units="in")
 ggsave(plot=MedDescP,"fishPlots/MedDescP.jpg",width=5,height=5,units="in")
 ggsave(plot=CWDP,"fishPlots/CWDP.jpg",width=5,height=5,units="in")
 ggsave(plot=ZeroP,"fishPlots/ZeroP.jpg",width=5,height=5,units="in")
+ggsave(plot=fishMet2,"fishPlots/fishmet2.jpg",width=8,height=5,units="in")
+
+CWYrDiff$Grp<-ifelse(CWYrDiff$YrDiff<=5,"Base",
+                     ifelse(CWYrDiff$YrDiff>=20,"Yr20",
+                            ifelse(CWYrDiff$YrDiff>=10&CWYrDiff$YrDiff<20,"Yr10","Yr5")))
+
+wilcox.test(FishDiff~Grp, data=CWYrDiff[CWYrDiff$Grp=="Base"|CWYrDiff$Grp=="Yr10",],conf.int=TRUE)
 
 ####################################################################################################
 ##Summary of Differences by Time Period
