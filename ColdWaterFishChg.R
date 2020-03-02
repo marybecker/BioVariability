@@ -240,7 +240,7 @@ CWFishMet2 <-data.frame(TimeP=factor(c("20-30 Yrs","10-20 Yrs","5-10 Yrs","5 Yrs
 
 
 fishMet2<-  ggplot(CWFishMet2)+
-              geom_line(aes(TimeP,Met*100,group=Lab,colour=Lab),size=1)+
+              geom_line(aes(TimeP,Met*100,group=Lab,colour=Lab),size=2)+
               geom_point(aes(TimeP,Met*100,group=Lab),colour="white",size=6)+
               geom_text(data=CWFishMet2[CWFishMet2$TimeP=="10-20 Yrs",],
                         aes(x=0,y=Met*100,label=c("Cold to Not Cold","Not Cold to Cold","No Change"),colour=Lab),hjust=0)+

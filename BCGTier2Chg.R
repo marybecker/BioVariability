@@ -1,11 +1,11 @@
-setwd("/home/mkozlak/Documents/Projects/GitHub/BioVariability")
+setwd("P:/Projects/GitHub_Prj/BioVariability")
 
 library(ggplot2)
 library(vegan)
 library(rgdal)
 library(stringr)
 
-tier<-5
+tier<-2
 attr<-4
 
 BCG<-read.csv(paste0("data/bugBCG",tier,"_MutliYr_02112020.csv"),header=TRUE)
@@ -71,7 +71,7 @@ BCGYrDiff$BCGDiff<-BCGYrDiff$BCGYr1-BCGYrDiff$BCGYr2
 BCGYrDiff$ABSBugDiff<-abs(BCGYrDiff$BugYr1-BCGYrDiff$BugYr2)
 
 #############SUMMARY STATS############################################################3
-cln<-8
+cln<-10
 
 #Summary stats of differences in samples taken within 5 Years apart
 nbase<-dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]#n combinations of samples within 5 Years apart
@@ -101,8 +101,8 @@ quant<-rbind(quantbase,quant20,quant10,quant5)
 stdev<-rbind(stdevbase,stdev20,stdev10,stdev5)
 BCGStat<-cbind(BCGStat,quant,stdev)
 
-write.csv(BCGStat,paste0("bugPlots/BCGStatDiff",tier,"Attr",attr,".csv"),row.names=FALSE)
-
+#write.csv(BCGStat,paste0("bugPlots/BCGStatDiff",tier,"Attr",attr,".csv"),row.names=FALSE)
+write.csv(BCGStat,paste0("bugPlots/BCGStatDiff",tier,".csv"),row.names=FALSE)
 
 ####BCGAttrMets##################################################################################################
 DescBase<- dim(BCGYrDiff[BCGYrDiff$BugDiff>(0)&BCGYrDiff$YrDiff<=5,])[1]/dim(BCGYrDiff[BCGYrDiff$YrDiff<=5,])[1]
@@ -265,5 +265,55 @@ BCGmet2<- ggplot(BCGMet2)+
                   axis.ticks.y=element_blank(),axis.text.y=element_blank())
 
 ggsave(plot=BCGmet2,paste0("bugPlots/BCGmet2Tier",tier,".jpg"),width=8,height=5,units="in")
+
+##########HISTOGRAM BCG###################################################################################
+###########################################################################################################
+
+DiffHistBaseBCG<-  ggplot(BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BCGDiff,y=(..count..)/sum(..count..)))+
+  geom_histogram(binwidth=1,fill=TPColors[4],alpha=0.7)+
+  labs(x="Difference in BCG Between Two Years",y="Proportion of Samples")+
+  xlim(-3,3)+
+  ylim(0,1)+
+  theme(panel.background = element_rect(fill = "white", colour = "grey"))
+
+DiffHist20BCG<-  ggplot()+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>=20,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[1],alpha=0.9)+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[4],alpha=0.4)+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Proportion of Samples")+
+  xlim(-3,3)+
+  ylim(0,1)+
+  theme(panel.background = element_rect(fill = "white", colour = "grey"))
+
+DiffHist10BCG<-  ggplot()+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>=10&BCGYrDiff$YrDiff<20,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[2],alpha=0.9)+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[4],alpha=0.4)+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Proportion of Samples")+
+  xlim(-3,3)+
+  ylim(0,1)+
+  theme(panel.background = element_rect(fill = "white", colour = "grey"))
+
+DiffHist5BCG<- ggplot()+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff>5&BCGYrDiff$YrDiff<10,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[3],alpha=0.9)+
+  geom_histogram(data=BCGYrDiff[BCGYrDiff$YrDiff<=5,],aes(x=BCGDiff,y=(..count..)/sum(..count..)),binwidth=1,fill=TPColors[4],alpha=0.4)+
+  labs(x="Difference in Taxa Rel Abundance Between Two Samples",y="Proportion of Samples")+
+  xlim(-3,3)+
+  ylim(0,1)+
+  theme(panel.background = element_rect(fill = "white", colour = "grey"))
+
+##histogram plots
+ggsave(plot=DiffHistBaseBCG,paste0("bugPlots/DiffHistBaseTierBCG",tier,".jpg"),width=5,height=5,units="in")
+ggsave(plot=DiffHist20BCG,paste0("bugPlots/DiffHist20TierBCG",tier,".jpg"),width=5,height=5,units="in")
+ggsave(plot=DiffHist10BCG,paste0("bugPlots/DiffHist10TierBCG",tier,".jpg"),width=5,height=5,units="in")
+ggsave(plot=DiffHist5BCG,paste0("bugPlots/DiffHist5TierBCG",tier,".jpg"),width=5,height=5,units="in")
+
+
+
+Time<-BCGYrDiff$YrDiff<=5
+Criteria1<-BCGYrDiff$BCGDiff<(-1)
+Criteria2<-BCGYrDiff$BCGDiff>1
+
+
+dim(BCGYrDiff[Time&Criteria1|Time&Criteria2,])[1]/dim(BCGYrDiff[Time,])[1]
+
 
 
