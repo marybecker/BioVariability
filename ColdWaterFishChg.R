@@ -625,6 +625,41 @@ str(CWYrDiff20sites.SP) # Now is class SpatialPointsDataFrame
 writeOGR(CWYrDiff20sites.SP,"CWYrDiff20sites.geojson",layer="CWYrDiff20sites", driver='GeoJSON',overwrite_layer = TRUE)
 
 
+####Prepare for mapping always cold / Compare temp & Fish######################################
+CWsum$Cold<-ifelse(CWsum$MaxOfFishPer100M>=10,1,0)
+
+totSiteCnt<-aggregate(SampleYear~STA_SEQ,data=CWsum,FUN=length)
+totSiteCntCold<-aggregate(SampleYear~STA_SEQ,data=CWsum[CWsum$Cold==1,],FUN=length)
+
+FishSiteCold<-merge(totSiteCnt,totSiteCntCold,by="STA_SEQ",all.x=TRUE)
+colnames(FishSiteCold)<-c("STA_SEQ","FishN","FishColdN")
+FishSiteCold$FishColdAll<-ifelse(FishSiteCold$FishN==FishSiteCold$FishColdN,1,0)
+
+totSitetempCnt<- aggregate(Year~SID,data=temp,FUN=length)
+totSitetempColdCnt<- aggregate(Year~SID,data=temp[temp$TempCatS=="Cold",],FUN=length)
+
+TempSiteCold<-merge(totSitetempCnt,totSitetempColdCnt,by="SID",all.x=TRUE)
+colnames(TempSiteCold)<-c("STA_SEQ","TempN","TempColdN")
+TempSiteCold$TempColdAll<-ifelse(TempSiteCold$TempN==TempSiteCold$TempColdN,1,0)
+
+fishSite<-unique(FishSiteCold$STA_SEQ)
+tempSite<-unique(TempSiteCold$STA_SEQ)
+
+multiYrSite<-append(fishSite,tempSite)
+multiYrSite<-as.data.frame(unique(multiYrSite))
+colnames(multiYrSite)<-"STA_SEQ"
+multiYrSite<-merge(multiYrSite,FishSiteCold,by="STA_SEQ",all.x=TRUE)
+multiYrSite<-merge(multiYrSite,TempSiteCold,by="STA_SEQ",all.x=TRUE)
+multiYrSite$ColdAllBoth<-ifelse(multiYrSite$FishColdAll==1&multiYrSite$TempColdAll==1,1,0)
+
+write.csv(multiYrSite,"fishPlots/multiFishTempYrSites.csv",row.names=FALSE)
+
+
+
+
+
+
+
 
 
 
