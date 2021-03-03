@@ -1,0 +1,109 @@
+# Set working directory
+setwd('C:/Users/deepuser/Documents/Projects/ProgramDev/BioVariability/Landscape_Chem')
+
+# Load libraries
+library(ggplot2)
+
+bcgTier<- "5"
+
+# Load raw data
+taxa <- read.csv(paste0('data/bcg',bcgTier,'Site_AllYears_Taxa.csv'),header=TRUE)
+colnames(taxa)[1]<-'staSeq'
+
+# Identify sites with multiple years of data
+taxa_multiyr <- unique(taxa[c("staSeq","Sample_Year")])
+taxa_multiyr <- aggregate(Sample_Year ~ staSeq, data= taxa_multiyr, FUN = length)
+taxa_multiyr <- taxa_multiyr[taxa_multiyr$Sample_Year>1,]
+taxa_multiyr <- merge(taxa, taxa_multiyr,by="staSeq")
+samples <- unique(taxa_multiyr[c("staSeq","Sample_Year.x")])
+colnames(samples) <- c("STA_SEQ","SampYr")
+
+# Function that takes in dataframe as c("STA_SEQ","SampYr","RelAbund" - x)
+# Returns all combinations of variable diffs for x across sample years
+bug_year_comb <- function(taxa_data){
+  sites <- unique(taxa_data$STA_SEQ)
+  #Create empty dataframe to store combinations
+  bug_year_diff<-data.frame(STA_SEQ=integer(),SampYr1=integer(),BugYr1=double(),
+                            SampYr2=integer(),BugYr2=double())
+  
+  #create a dataframe of all possible combinations of samples across years
+  for (i in 1:length(sites)){
+    bug_site<-taxa_data[taxa_data$STA_SEQ == sites[i],]
+    comb<-as.data.frame(t(combn(bug_site$SampYr,2)))
+    bug_siteDiff<-merge(bug_site,comb,by.x="SampYr",by.y="V1",all.y=TRUE)
+    bug_siteDiff<-merge(bug_site,bug_siteDiff,by.x="SampYr",by.y="V2",all.y=TRUE)
+    bug_siteDiff<-bug_siteDiff[,c(2,1,3,4,6)]
+    colnames(bug_siteDiff)<-c("STA_SEQ","SampYr1","BugYr1","SampYr2","BugYr2")
+    bug_year_diff<-rbind(bug_year_diff,bug_siteDiff)
+  }
+  
+  bug_year_diff$BugDiff<-bug_year_diff$BugYr1-bug_year_diff$BugYr2
+  bug_year_diff$YrDiff<-bug_year_diff$SampYr1-bug_year_diff$SampYr2
+  
+  return(bug_year_diff)
+}
+
+
+#Set variables for loop
+taxa_attributes <- list(taxa_multiyr[taxa_multiyr$BCG_Attribute<4,],
+                   taxa_multiyr[taxa_multiyr$BCG_Attribute==4,],
+                   taxa_multiyr[taxa_multiyr$BCG_Attribute>4,])
+colors <- c("#008837","#f9711d","#B39DDB")
+taxa_attribute_names <- c("Sensitive","Moderate","Tolerant")
+
+#Run for each bcg taxa attribute
+for(i in 1:length(taxa_attributes)){
+  #Select bcg attribute taxa (sensitive, moderate or tolerant taxa)
+  select_taxa <- taxa_attributes[[i]]
+  
+  # Aggregate selected bcg taxa attribute 
+  bugc <- aggregate(select_taxa$RelAbund,
+                    by=as.list(select_taxa[,c("staSeq","Sample_Year.x")]),
+                    FUN=sum)
+  colnames(bugc)<-c("STA_SEQ","SampYr","RelAbund")
+  
+  #Merge any samples that have 0% rel abund of bcg attribute taxa
+  bugc <- merge(samples,bugc,by=c("STA_SEQ","SampYr"),all.x=TRUE)
+  bugc[is.na(bugc)]<-0
+  
+  #call function
+  bug_year_diff <- bug_year_comb(bugc)
+  
+  # Add Year Group
+  bug_year_diff$YrGrp<-ifelse(bug_year_diff$YrDiff<=5,1,
+                              ifelse(bug_year_diff$YrDiff>=20,4,
+                                     ifelse(bug_year_diff$YrDiff>9&bug_year_diff$YrDiff<20,3,2)))
+  
+  # Run and save plots
+  bug_year_diff_bp <- ggplot(bug_year_diff,aes(as.factor(YrGrp),BugDiff))+
+    geom_boxplot(fill = colors[i])+
+    labs(y=paste("Difference in Relative Abundance of",
+                 taxa_attribute_names[i],"Taxa"),
+         x="Number of Years Between Two Samples")+
+    ylim(-0.5,0.5)+
+    scale_x_discrete(labels=c("1-5","5-10","10-20","20-30"))+
+    theme(panel.background = element_rect(fill = "white", colour = "grey"))
+  
+  file1 <- paste0("plots/taxadiffbp_bcg",bcgTier,taxa_attribute_names[i],".png")
+  ggsave(plot=bug_year_diff_bp,file1,width=5,height=5,units="in")
+  
+  # Get the median value for each year group
+  by_bug_year_diff <- by(bug_year_diff$BugDiff, bug_year_diff$YrGrp,median,simplify=FALSE)
+  median_bug_year_diff <- as.data.frame(cbind(by_bug_year_diff))
+  median_bug_year_diff$years <- rownames(median_bug_year_diff)
+  
+  bug_year_diff_bar <-  ggplot(median_bug_year_diff,aes(as.factor(years),by_bug_year_diff))+
+    geom_col(fill = colors[i])+
+    labs(y=paste("Median Difference in Relative Abundance of",
+                 taxa_attribute_names[i],"Taxa"),
+         x="Number of Years Between Two Samples")+
+    coord_cartesian(ylim=c(-0.15,0.15))+
+    scale_x_discrete(labels=c("1-5","5-10","10-20","20-30"))+
+    theme(panel.background = element_rect(fill = "white", colour = "grey"))
+  bug_year_diff_bar
+  
+  file2 <- paste0("plots/taxadiffmedbar_bcg",bcgTier,taxa_attribute_names[i],".png")
+  ggsave(plot=bug_year_diff_bar,file2,width=5,height=5,units="in")
+}
+
+

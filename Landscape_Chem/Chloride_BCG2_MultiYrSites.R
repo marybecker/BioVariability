@@ -25,7 +25,7 @@ for (i in 1:length(parameter)){
   c_agg$diff <- c_agg$x.2 - c_agg$x.1
   
   
-  c_multiYr <- merge(chloride,c_agg,by='staSeq')
+  c_multiYr <- merge(chem_parameter,c_agg,by='staSeq')
   c_multiYr <- aggregate(c_multiYr$value,by=as.list(c_multiYr[,c('staSeq','Grp')]),FUN=mean)
   
   
