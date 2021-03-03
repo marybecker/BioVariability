@@ -1,39 +1,254 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<head>
-	<meta charset=utf-8 />
-	<title>Fish Diffence</title>
-	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
-	<link href="style.css" type="text/css" rel="stylesheet">
+		<title>Biointegrity Over Time</title>
 
-	<style>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/league.css" id="theme">
 
-	</style>
-</head>
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			
+			<div class="slides">
 
-<body>
+				<div  class = "footer">
+					<img src="images/DEEP-Circle-Logo.png" alt="CT DEEP" style="vertical-align: middle; height: 50px;">
+					Connecticut Department of Energy and Environmental Protection
+				</div>
+	
+				<section>
+						<h3>Clean Water Act Implementation Progress and Needs for Continuing Success in Connecticut</h3>
+						<p>Informing High Water Quality Protection</p>
+						<hr>
+						<p>Mary Becker and Christopher Bellucci</p>
+						<p class = "smTxt">
+							Monitoring and Assessment Program, Bureau of Water Protection and Land Reuse
+						</p>
+							</br>
+						<p class ="smTxt" style="color:aqua">
+							Northeast Aquatic Biologist Conference - March 5, 2021
+						</p>		
+				</section>
 
-	<h1>Changes in Cold Water Fish - Samples 20 - 30 Years Difference</h1>
+				<section>
+					Historically Polluted Streams
+					<hr>
+					<img src="images/WillimanticOverTime.png" alt="Willimantic River" height ="300">
+					<p class="smTxt">Willimantic River, Stafford CT 1960s (left) and 2000s (right)</p>
+				</section>
 
-	<div id='map'></div>
-	<!--<section id="about">-->
-		<!--<h2>About this</h2>-->
-			<!--<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>-->
-			<!--<p>Map authored by me, MY NAME</p>-->
-	<!--</section>-->
+				<section>
+					Sentinel Streams
+					<hr>
+					<div class="r-hstack">
+					<img src="images/SageRavine.png" alt="Sages Ravine" height ="450">
+					<p class="smTxt" style="padding: 1.00em;">Sages Ravine Brook, </br> Salisbury CT</p>
+				</section>
 
-	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-	<!-- Load a Leaflet plugin to provide geolocation. -->
-	<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
-	<script src="data/CWYrDiff20.js"></script>
-	<script src="main.js"></script>
+				<section>
+					Biological Condition Gradient (BCG) <sup class="smTxt"> 1 </sup>
+					<hr>
+					<img src="images/BCG.png" alt="BCG" height ="475" style ="background:rgb(255, 255, 255);">
+				</section>
 
-</body>
+				<section>
+					Historic Assessments
+					<hr>
+					<img src="images/HistoricAssessments.png" alt="Historic Assessments" height ="500"></br>
+				</section>
 
+				<section>
+					Biological Condition Gradient Assessments</sup>
+					<hr>
+					<img src="images/BCG_Assessments.png" alt="Macroinvertebrate Biological Condition Gradient" 
+					height ="500"></br>
+				</section>
+
+				<section>
+					Macroinvertebrate Biological Condition Gradient <sup class="smTxt">1-2</sup>
+					<hr>
+					<img src="images/Macroinvertebrate_BCG.png" alt="Macroinvertebrate Biological Condition Gradient" 
+					height ="500" style ="background:rgb(255, 255, 255);"></br>
+				</section>
+				<section>
+					<a  href: "https://marybecker.github.io/Biointegrity/">
+						https://marybecker.github.io/Biointegrity/
+					</a>
+					<hr>
+					
+					<img src="images/BiointegrityMap.png" alt="Biointegrity Map" height ="475"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Multi-Year Macroinvertebrate Sites 1989-2019
+					<hr>
+					<img src="images/BCGSites.png" alt="BCG Sites" height ="475"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Example - Difference in Relative Abundance (RA) Across All Sample Combinations
+					<hr>
+					<div class="smTxt" style="text-align: left;">
+					Difference in Relative Abundance of <span style="color: #008837">Sensitive</span>
+					, <span style="color: #f9711d">Moderate</span> and 
+					<span style = "color:#B39DDB;">Tolerant</span> Taxa
+					</div>
+						<div class="r-hstack">
+						<div class = "smTxt" style = "text-align: left; color: aqua;">
+							Year 1 - Most recent Year in Combo</br>
+							Year 2 - Second Year in Combo
+						</div>
+						<div class = "smTxt" style="padding: 3.00em; color: aqua;">
+							Year 1 RA - Year 2 RA = Difference (Diff)
+						</div>
+					</div>
+					<div class = "smTxt">
+						<table>
+							<thead>
+								<tr>
+									<th>Year 1</th>
+									<th>Year 2</th>
+									<th>Diff (Yrs)</th>
+									<th>RA Yr 1</th>
+									<th>RA Yr 2</th>
+									<th>Diff (RA)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2014</td>
+									<td>1994</td>
+									<td>20</td>
+									<td>0.37</td>
+									<td>0.53</td>
+									<td>-0.16</td>
+								</tr>
+								<tr>
+									<td>2014</td>
+									<td>2005</td>
+									<td>9</td>
+									<td>0.37</td>
+									<td>0.02</td>
+									<td>-0.16</td>
+								</tr>
+								<tr>
+									<td>2005</td>
+									<td>1994</td>
+									<td>11</td>
+									<td>0.35</td>
+									<td>0.53</td>
+									<td>-0.18</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+				<section>
+					Multi-Year BCG Tier 5 Sites
+					<hr>
+					<img src="images/BCG5YrDiff.png" alt="BCG 2  Year Diff" height ="475"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Multi-Year BCG Tier 2 Sites
+					<hr>
+					<img src="images/BCG2YrDiff.png" alt="BCG 2  Year Diff" height ="475"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Landscape Changes at BCG Tier 2 Sites
+					<hr>
+					<div class="smTxt">**Add transition/intro to landscape data here**</div>
+				</section>
+				<section>
+					Landscape Changes at BCG Tier 2 Sites
+					<hr>
+					<img src="images/ChgCoreForests.png" alt="Change Core Forest" height ="500"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Landscape Changes at BCG Tier 2 Sites
+					<hr>
+					<img src="images/ChgDevelopment.png" alt="Change Development" height ="500"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Chemical Changes at BCG Tier 2 Sites
+					<hr>
+					<img src="images/ChgChloride.png" alt="Change Chloride" height ="500"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Chemical Changes at BCG Tier 2 Sites
+					<hr>
+					<img src="images/ChgChlorideSites.png" alt="Change Chloride Sites" height ="500"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Temperature Changes at Tier 2 BCG Sites
+					<hr>
+					<img src="images/TemperaureDiff.png" alt="Change in Temperature" height ="500"
+						style= "border: 5px; border-color: whitesmoke;"></br>
+				</section>
+				<section>
+					Nutrient Changes at Tier 2 BCG Sites
+					<hr>
+					Add if I get time
+				</section>
+				<section>
+					Work In Progress
+					<hr>
+					<div class="r-stack">
+						<img src="images/Screenshot_2021-03-03 High Quality Rivers.png" width="600"  class="fragment">
+						<img src="images/bcg_CoreForest2015.png" width="500"  class="fragment">
+						<img src="images/BCG_Assessments.png" width="650"  class="fragment" 
+						style ="background:#2b2b2b;">
+					</div>
+				</section>
+				<section>
+					Acknowledgements
+					<hr>
+					We Thank...
+				</section>
+				<section>
+					References
+					<hr>
+					Add Refs
+				</section>
+				<section>
+					Tech Stack
+					<hr>
+					Add Tech Stack
+				</section>
+				<section>
+					Questions / Comments
+					<hr>
+					Add Links
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
 </html>
