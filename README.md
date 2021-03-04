@@ -1,7 +1,9 @@
 # Clean Water Act Implementation Progress and Needs for Continuing Success in Connecticut.  Informing High Water Quality Protection
 
 Mary Becker and Christopher Bellucci
+
 Monitoring and Assessment Program, Bureau of Water Protection and Land Reuse
+
 Connecticut Department of Energy and Environmental Protection
 
 Significant progress has been made to clean up rivers since the passage of the Federal Clean Water Act in 1972. However, much of the focus has been on fixing waste-receiving streams with overt pollution problems which has left high quality streams vulnerable and open to degradation. This project seeks to demonstrate progress made to date, while at the same time highlighting the need to modernize assessment methods to identify high quality streams and continue to augment the success of the Clean Water Act.  
