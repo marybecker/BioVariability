@@ -1,5 +1,5 @@
 # Set working directory
-setwd('C:/Users/deepuser/Documents/Projects/ProgramDev/BioVariability/Landscape_Chem')
+setwd('')
 
 # Load libraries
 library(ggplot2)
