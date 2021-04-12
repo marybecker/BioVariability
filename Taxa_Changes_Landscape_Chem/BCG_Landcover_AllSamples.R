@@ -48,6 +48,9 @@ ggplot(BCG_CF,aes(as.factor(NominalTier),CFPct,fill=as.factor(NominalTier)))+
         axis.title = element_text(color='#cccccc'),
         legend.position = 'none')
 
+ggsave('C:/Users/deepuser/Documents/Projects/ProgramDev/BioVariability/images/bcg_CoreForest.png',
+       width=5,height=5,units="in")
+
 ggplot(BCG_CF,aes(as.factor(NominalTier),CF,fill=as.factor(NominalTier)))+
   geom_boxplot(colour='#cccccc')+
   xlab('BCG Tier')+
