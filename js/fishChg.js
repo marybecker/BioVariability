@@ -87,7 +87,7 @@ function addLayers (data) {
 
 function getRadius (area){
     var r = get_bin([area],bins=breaks)[0];
-    var R = {0:30,1:20,3:15,4:8,5:2,6:1};
+    var R = {0:30,1:20,3:15,4:8,5:2,6:2};
     return R[r];
 }
 
